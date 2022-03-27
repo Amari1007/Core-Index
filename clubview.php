@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once("include/coreDB.php");
+require_once("include/coreDB.php"); //import database connector
 
     //check if post or get method was used
             
