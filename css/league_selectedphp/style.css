@@ -1,0 +1,200 @@
+body{
+    overflow-x: hidden;
+}
+
+td{
+    font-weight: 500;
+}
+
+.navbar-default{
+    margin-top: 0px !important;
+}
+
+.navbar-inverse{
+   margin-bottom: 0px !important; 
+}
+
+main{
+/*    border: 1px solid black;*/
+    padding:0px;
+/*    border-top: 1px solid lightgrey;*/
+/*    overflow-x: hidden;*/
+
+}
+
+/************** ADVERTISEMENTS***************/
+
+#ads{
+    margin-bottom: 20px;
+}
+
+#ads p{
+    padding-left: 20px;
+/*    border: 1px solid black;*/
+    text-align: left;
+    margin-bottom: 0px;
+    font-weight: 500;
+}
+/**********************************************/
+
+
+/************LEFT SIDE BAR*********************/
+
+#sidebar{
+/*    border: 1px solid black;*/
+    width: 20%;
+    float: left;
+/*    padding: 5px;*/
+    overflow-x: hidden;
+}
+
+#sidebar a{
+    color: #123794;
+}
+
+#team-list{
+ margin-top: 40px;
+}
+
+#team-list h4{
+    margin-bottom: 0px;
+}
+
+#team-list h4:hover{
+    cursor: pointer;
+}
+
+#team-list table td{
+    text-align: left;
+}
+
+/*******************************************/
+
+#main_content{
+    float:right;
+    width:80%;
+/*    border: 1px solid black;*/
+    padding: 2px;
+    overflow-x: hidden;
+    border-left: 1px solid lightgrey;
+}
+
+/************** LEAGUE NEWS ********************/
+.league_news{
+/*    border: 1px solid black;*/
+    float: left;
+    width: 100%;
+    padding: 5px;
+    overflow-x: hidden
+    
+}
+
+.league_news article a{
+    text-decoration: none;
+    color: #123467;
+}
+
+.league_news article header{
+/*    border: 1px solid black;*/
+}
+
+.league_news article aside{
+/*    border: 1px solid black;*/
+/*    border-top: 2px solid lightgrey;*/
+    margin-top: 20px;
+    text-align: right;
+    font-size: 12px;
+}
+
+.league_news article{
+/*    border: 1px solid black;*/
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 10px;
+    padding: 5px;
+    min-height: 150px;
+/*    background-image: url(../../Media/spursfooter.jpg);*/
+/*    background-image: -webkit-linear-gradient(#336666,#66cccc);*/
+    background-position: center;
+    background-attachment: scroll;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+/**********************************************/
+
+
+.league_content{
+/*    border: 1px solid black;*/
+    float: right;
+    width: 100%;
+    padding: 0px;
+}
+
+
+/***********LEAGUE TABLE***************/
+.league_table{
+/*    border: 1px solid black;*/
+    padding: 0px;
+}
+
+.league_table th, .league_table td{
+    text-align: left;
+}
+
+.league_fixtures div, .league_table div, .league_top_scorers div{
+    text-align:right;
+    font-weight: 500;
+}
+
+
+
+/****************************************/
+
+.league_fixtures{
+/*    border: 1px solid black;*/
+    padding: 0px;
+}
+
+.league_fixtures span{
+/*    border: 1px solid black;*/
+    padding: 0px;
+    font-size: 11px;
+    display:inline-block;
+    margin-top: 15px;
+/*    font-weight: bold;*/
+}
+
+.league_fixtures h4, .league_table h4, .league_top_scorers h4{
+/*    border: 1px solid black;*/
+    padding: 5px;
+    background-color: gold;
+    margin-bottom: 0px;
+}
+
+.league_top_scorers{
+/*    border: 1px solid black;*/
+}
+
+.league_top_scorers table th{
+    text-align: left;
+}
+
+.league_top_scorers table td{
+    text-align: left;
+}
+
+
+
+/************** MEDAIA QUERIES 966px ****************/
+@media(max-width:966px){
+    #sidebar{
+        display: none;
+    }
+    
+    #main_content{
+        float: none;
+        width: 100%;
+        border-left:0px;
+    }
+}

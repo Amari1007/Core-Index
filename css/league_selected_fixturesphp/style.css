@@ -1,0 +1,28 @@
+/***************DATE SELECTOR BAR********************/
+#dates{
+    border-top: 1px solid lightgrey !important;
+    border-bottom: 1px solid lightgrey !important;
+    padding: 0px;
+    margin-bottom: 20px;
+    width: auto;
+    /****horizonral scrollbar**/
+    overflow: auto;
+    white-space: nowrap; 
+}
+ 
+#dates button{
+    background: white;
+    border-right: 1px solid lightgrey !important;
+    color: black !important;
+    border-radius: 0px;
+    padding: 5px 20px 5px 20px;
+    color: black;
+    margin-left: -4px;    
+    height: 50px;
+    outline:none;
+}
+
+#dates button:hover{
+    background-color: lightgray;
+    cursor:pointer;
+}

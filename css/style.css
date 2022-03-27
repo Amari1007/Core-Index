@@ -1,0 +1,59 @@
+/**************UNIVERSAL**************/
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Segoe UI;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+main{
+    min-height: 700px;
+}
+
+/********************HEADERGROUP***********************/
+
+
+/**************FOOTER GROUP********************/
+footer{
+    height: 500px;
+    background: url("../Media/spursfooter.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+/*    background-attachment: fixed;*/
+    background-size: cover;
+    border-top: 2px solid #e8491d;
+    margin-top: 20px;
+    color: white;
+    font-family: helvetica;
+
+}
+
+.left, .right{
+ margin-top: 30px;   
+}
+
+footer .left{
+    float: left;
+/*    border: 1px solid black;*/
+    width: 50%;
+}
+
+footer .left h1{
+    float: left;
+}
+
+footer .left p{
+    float: none;
+    display: inline-block;
+    text-align: left;
+}
+
+footer .right{
+    float: right;
+/*    border: 1px solid black;*/
+    width: 50%;
+    font-weight: 500;
+}

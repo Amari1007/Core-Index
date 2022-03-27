@@ -1,0 +1,52 @@
+.active_location{
+    color: #e8491d;
+    font-weight: bold;
+}
+
+table{
+/*    border: 1px solid grey;  */
+    width: 100%;
+    margin: auto;
+    font-size:16px;
+/*    border-top: 2px solid #e8491d;*/
+/*    border-bottom: 1px solid #e8491d;*/
+    margin-bottom: 50px;
+}
+
+td{
+    border-collapse: collapse;
+    text-align: left;
+    padding: 10px;
+    width: 40%;
+}   
+
+#fixture_list{
+    width:80%; 
+    margin:0px auto; 
+    margin-bottom: 70px;
+    border-bottom:1px solid #e8491d;
+}
+
+#fixture_list table{
+    font-size:16px;
+    border-top: 0px solid #e8491d;
+    border-bottom: 0px solid #e8491d;
+/*    margin-bottom: 100px;*/
+}
+
+/*****************************************/
+.pass_accuracy{
+/*    margin-top: 10px;*/
+/*        border: 1px solid black;*/
+
+}
+
+.shot_conversion{
+/*    border-top: 3px solid #e8491d;*/
+    margin-top: 20px;
+/*    border: 1px solid black;*/
+}
+
+.anychart-credits-text{
+    visibility: hidden;
+}

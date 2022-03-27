@@ -1,0 +1,25 @@
+.communityphp_active{
+    color: #e8491d;
+    font-weight: bold;
+}
+
+table{
+    width:30%;
+}
+
+table td{
+    padding: 20px;
+    width: 100%;
+}
+
+table input[type='submit']{
+    border: 0px solid #e8491d;
+    background-color: #e8491d;
+    padding: 5px;
+    color: white;
+    font-weight: 600;
+}
+
+table input[type='number']{
+    width: 100%;
+}

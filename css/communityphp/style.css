@@ -1,0 +1,50 @@
+.communityphp_active{
+    color: #e8491d;
+    font-weight: bold;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.addplayer{
+    border: 0px solid #35424a;
+    padding: 10px;
+/*    background-color: #35424a;*/
+    color: black;
+    background-image:url(../../icons_pack/person-add-outline.svg);
+    background-repeat: no-repeat;    
+    background-position: center;
+    background-size: contain;
+    background-attachment: scroll;
+    border-radius: 6px;
+    height: 350px;
+    width: 100%;
+}
+
+.addplayer h2:hover{
+    color: #123497;
+}
+
+.editplayer{
+    border: 0px solid #35424a;
+    padding: 10px;
+/*    background-color: #35424a;*/
+    color: black;
+    border-radius: 6px;
+    height: 350px;
+    width: 100%;
+    background-image:url(../../icons_pack/person-remove-outline.svg);
+    background-repeat: no-repeat;    
+    background-position: center;
+    background-size: contain;
+    background-attachment: scroll;
+}
+
+.editplayer h2:hover{
+    color: #123497;
+}

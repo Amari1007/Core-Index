@@ -1,0 +1,7 @@
+#league_table table th, #league_table table td{
+    text-align: left;
+}
+
+#league_table table td{
+/*    border: 1px solid black;*/
+}

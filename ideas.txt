@@ -1,0 +1,60 @@
+/*********** UI RESTRUCTURING **************/
+-player view restructuring
+-data selected passed with JSON instead of $_GET[]
+-news articles residing in different files
+
+/******************************************/
+
+
+
+/*********** SECURE SQL *********************/
+-optimize sql commands to be secure 
+
+/********************************************/
+
+
+
+/*********** DATABASE RESTRUCTURING ***********/
+-contemplate more centralised cohesive database
+-organize database for 20/21 and new 22/23 season
+
+/*********************************************/
+
+
+/*********** ADMIN_USER SCHEME **************/
+
+ADMIN
+-change player data
+-update scores
+
+USER
+-can vote for upcoming match
+-can follow team or player
+-receive team or player news links in email
+
+/*******************************************/
+
+
+ATT
+-goals 
+-assists
+-shot conversion
+
+CRE
+-assists
+-chances created
+-crosses
+
+TEC
+-pass accuracy
+-dribbling
+-shot conversion
+
+TAC
+-interceptions
+-chances created
+
+DEF
+-tackling
+-aerial
+-possession won

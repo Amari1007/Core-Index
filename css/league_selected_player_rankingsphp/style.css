@@ -1,0 +1,32 @@
+.league_rankings{
+/*    border: 1px solid black;*/
+    width: 65%;
+    margin: 0px auto;
+    margin-top: 30px;
+    
+}
+
+.navbar-inverse{
+/*    border: 2px solid pink;*/
+    margin-bottom: 0px;
+}
+
+.navbar-default{
+/*    border: 1px solid black;*/
+}
+
+.navbar-default button{
+    display: none;
+}
+
+#display table th,#display table td{
+    text-align: left;
+}
+
+@media(max-width:600px){
+    
+    .league_rankings{
+        width: 90%;
+    }
+    
+}

@@ -1,0 +1,53 @@
+/************LEFT SIDE BAR*********************/
+
+#sidebar{
+/*    border: 1px solid black;*/
+    width: 25%;
+    float: left;
+/*    padding: 5px;*/
+    overflow-x: hidden;
+}
+
+#sidebar a{
+    color: #123794;
+}
+
+#team-list{
+ margin-top: 40px;
+}
+
+#team-list h4{
+    margin-bottom: 0px;
+}
+
+#team-list h4:hover{
+    cursor: pointer;
+}
+
+#team-list table td{
+    text-align: left;
+}
+/*********************************************/
+
+
+/**********news_content*********/
+#news_content{
+    width: 75%;
+    float: right;
+/*    pointer-events:*/
+}
+/******************************/
+
+
+/************** MEDAIA QUERIES 966px ****************/
+@media(max-width:966px){
+    #sidebar{
+        display: none;
+    }
+    
+    #news_content{
+        float: none;
+        width: 100%;
+        border-left:0px;
+    }
+}

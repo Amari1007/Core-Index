@@ -1,0 +1,41 @@
+.clubviewphp_active{
+    color: #e8491d;
+    font-weight: bold;
+}
+
+table{
+/*    border: 1px solid grey;  */
+    width: 100%;
+    margin: auto;
+    font-size:16px;
+    border-top: 2px solid #e8491d;
+    border-bottom: 1px solid #e8491d;
+    margin-bottom: 50px;
+}
+
+td{
+    border-collapse: collapse;
+    text-align: left;
+    padding: 10px;
+    width: 40%;
+} 
+
+th{
+    font-family: helvetica;
+    padding: 10px;
+    font-size: 18px;
+}
+
+#fixture_list{
+    width:80%; 
+    margin:0px auto; 
+    margin-bottom: 70px;
+    border-bottom:1px solid #e8491d;
+}
+
+#fixture_list table{
+    font-size:16px;
+    border-top: 0px solid #e8491d;
+    border-bottom: 0px solid #e8491d;
+/*    margin-bottom: 100px;*/
+}

@@ -1,0 +1,61 @@
+.GK, .CB, .LB, .LWB, .RB, .RWB, .CDM, .CM, .CAM, .LM, .LW, .RW, .RM, .CF, .ST{
+    padding: 1px 6px;
+	margin: 0px;
+	color:white;
+	font-size:15px;
+    border-radius: 3px;
+}
+
+.LW, .RW, .CF, .ST{
+	background-color:royalblue;
+}
+
+.CM, .CDM, .CAM, .RM, .LM{
+	background-color:yellowgreen;
+}
+
+.CB, .LB, .LWB, .RB, .RWB{
+	background-color:orangered;
+}
+
+.GK{
+	background-color:grey;	
+}
+
+.p1, .p2, .p3, .p4{
+    padding: 3px 7px 3px 7px;
+	color:white;
+	font-size:17px;    
+	background-color:yellowgreen;
+}
+
+.p5, .p6, .p7, .p8{
+    padding: 3px 7px 3px 7px;
+	color:white;
+	font-size:17px;    
+	background-color:royalblue;
+}
+
+.p9, .p10, .p11, .p12, .p13, .p14{
+    padding: 3px 7px 3px 7px;
+	color:white;
+	font-size:17px;    
+	background-color:royalblue;
+}
+
+.p15, .p16, .p17{
+    padding: 3px 7px 3px 7px;
+	color:white;
+	font-size:17px;    
+	background-color:darkorange;
+}
+
+.p18, .p19, .p20{
+    padding: 3px 7px 3px 7px;
+	color:white;
+	font-size:17px;    
+	background-color:red;
+}
+
+
+

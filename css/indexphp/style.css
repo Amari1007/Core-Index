@@ -1,0 +1,57 @@
+.indexphp_active{
+    color: #e8491d;
+    font-weight: bold;
+}
+
+#player_list{
+/*    border: 1px solid black;*/
+    padding: 5px;
+    margin-top: 50px;
+/*    width: 80%;*/
+}
+
+#player_list table{
+/*    border: 1px solid black;*/
+    width:80%;
+    margin: 0px auto;
+}
+
+#player_list table td{
+    padding: 5px;
+/*    border: 1px solid black;*/
+    text-align: left;
+/*    display: block;*/
+}
+
+#player_list table th{
+    text-align: left;
+    color: #012374;
+}
+
+#player_list a{
+    color: #012374;    
+}
+
+
+@media(max-width:515px){
+    
+    #player_list table{
+        width: 100%;
+    }
+    
+    #player_list table tr{
+        border-bottom: 2px solid #e8491d;
+/*        margin-top: 50% !important;*/
+    }
+    
+    #player_list table td{
+        display: block;
+        width: 100%;
+        text-align: center;    
+        padding-left: 50%;
+    }
+    
+    #player_list table thead{
+        display: none;
+    }
+}
