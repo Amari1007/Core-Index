@@ -18,7 +18,11 @@ else{
 <html lang="en">
     <?php require_once("include/headCode.php") ;?>    
     <head>
-    <link rel="stylesheet" type="text/css" href="css/league_selected_table/style.css"/>
+        <style>
+            #league_table table th, #league_table table td{
+                text-align: left;            }
+        </style>
+    
     </head>
 
     <body>
