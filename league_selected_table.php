@@ -16,7 +16,8 @@ else{
 
 <!DOCTYPE html>
 <html lang="en">
-    <?php require_once("include/headCode.php") ;?>    
+    <?php     
+    require_once("include/headCode.php") ;?>    
     <head>
         <style>
             #league_table table th, #league_table table td{
