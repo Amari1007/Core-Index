@@ -24,7 +24,7 @@
                         </ul>
                 </div>
             </form>
-            <div class="nav navbar-nav navbar-right">
+            <div class="navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="sign_in.php">Sign-In <span class="glyphicon glyphicon-user"></span> </a>

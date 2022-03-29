@@ -10,6 +10,13 @@ require_once("include/coreDB.php");
         <script>
             document.title = "Sign-in";
         </script>
+        <script>
+            $("document").ready(function(){
+                
+            })
+            
+        </script>
+        <link rel="stylesheet" href='css/sign_inphp/style.css'>
     </head>
 
     <body>    
@@ -17,17 +24,21 @@ require_once("include/coreDB.php");
     
     <main class="container-fluid">
         
-        <form class="" method="post" action="" style="width:60%;margin:auto">
-            <div class="form-control">
-                <input type="text" placeholder="User Name..." autocomplete="off">
-            </div>
-            <div class="form-control">
-                <input type="password" placeholder="Password..." autocomplete="off">
-            </div>
+        <form method="post" action="<?php echo htmlspecialchars("include/sign_in_verify.php") ?>" autocomplete="off">
+            <div class="form_field">
+                <div class="form-group">
+                    <label for="user_name"><h4>User Name</h4></label> <br/>
+                    <input type="text" name="user_name" id="user_name" placeholder="User Name..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><h4>Password</h4></label> <br/>
+                    <input type="password" name="password" id="password" required>
+                </div>
                 
-            <button type="submit" class="btn btn-success">Sign-in</button>
-            <button type="reset" class="btn btn-main">Reset</button>
-            
+                <button type="submit" class="btn btn-success">Sign-in</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </div>
         </form>
 
     </main>

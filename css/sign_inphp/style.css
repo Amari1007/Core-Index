@@ -1,0 +1,17 @@
+form{
+    border:0px solid black;
+    width:100%;
+    margin:auto;
+    padding:5px;
+}
+
+form .form_field{
+    text-align: center;
+}
+
+form input{
+    padding: 8px;
+    width: 300px;
+    border: 3px solid purple;
+    border-radius:7px;
+}
