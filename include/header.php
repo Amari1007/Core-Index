@@ -24,13 +24,37 @@
                         </ul>
                 </div>
             </form>
+            
+            <!-- SHOW SIGN IN BUTTON ONLY IF USER ISNT SIGNED IN -->
+            <!-- OTHERWISE SHOW LOGOUT BUTTON -->
+            <?php if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ): ?>
+            
+            <div class="navbar-right dropdown">  
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin-top:7px">
+                    <span style="font-size:17px;font-weight:bold">
+                        <?php echo $_SESSION['user_name'] ?>
+                    </span>
+                    <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu">
+                    <li><a href="include/log_out.php" title="Logout?">Logout</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </div>
+            
+			<?php elseif( !isset($_SESSION['user_id']) || !isset($_SESSION['user_name']) ): ?>
             <div class="navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="sign_in.php">Sign-In <span class="glyphicon glyphicon-user"></span> </a>
+                        <a href="sign_in.php" title="Click here to logout">Sign-In <span class="glyphicon glyphicon-user"></span> </a>
                     </li>
                 </ul>
             </div>
+            
+			<?php endif ?>
+            
         </div>  
     </div> 
 </nav>

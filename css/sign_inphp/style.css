@@ -6,6 +6,9 @@ form{
 }
 
 form .form_field{
+    border: 0px solid black;
+    width: 100%;
+    margin: 0px auto;
     text-align: center;
 }
 

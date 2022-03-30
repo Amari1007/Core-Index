@@ -10,12 +10,6 @@ require_once("include/coreDB.php");
         <script>
             document.title = "Sign-in";
         </script>
-        <script>
-            $("document").ready(function(){
-                
-            })
-            
-        </script>
         <link rel="stylesheet" href='css/sign_inphp/style.css'>
     </head>
 
@@ -32,10 +26,12 @@ require_once("include/coreDB.php");
                 </div>
 
                 <div class="form-group">
-                    <label for="password"><h4>Password</h4></label> <br/>
+                    <label for="password"><h4>Password</h4></label>
+                    <br/>
                     <input type="password" name="password" id="password" required>
                 </div>
                 
+                <p><a href="">Create Account Instead?</a></p>
                 <button type="submit" class="btn btn-success">Sign-in</button>
                 <button type="reset" class="btn btn-danger">Reset</button>
             </div>
