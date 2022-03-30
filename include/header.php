@@ -14,7 +14,13 @@
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/index.php"?"active":" " ?> "> <a href="index.php">Players</a></li>
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/leagues.php"?"active":" " ?> "> <a href="leagues.php">Leagues</a></li>
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/clubs.php"?"active":" " ?> "> <a href="clubs.php">Clubs</a></li>
+                
+                <?php if( isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'admin' && isset($_SESSION['user_name']) ): ?>
+                
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/community.php"?"active":" " ?> "> <a href="community.php">Community</a></li>
+                
+                <?php endif ?>
+                
             </ul>
             <form class="navbar-form navbar-left" role="search"> 
                 <div class="dropdown form-group" id="dropdown_menu">

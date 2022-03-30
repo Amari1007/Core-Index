@@ -26,6 +26,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     if($row['password'] === $u_password){
                         session_start();
                         $_SESSION['user_id'] = $row['user_id'];
+                        $_SESSION['user_type'] = $row['user_type'];
                         $_SESSION['user_name'] = $row['user_name'];
                     
                         //session_unset(); //comment this later

@@ -31,7 +31,7 @@ require_once("include/coreDB.php");
                     <input type="password" name="password" id="password" required>
                 </div>
                 
-                <p><a href="">Create Account Instead?</a></p>
+                <p><a href="#">Create Account Instead?</a></p>
                 <button type="submit" class="btn btn-success">Sign-in</button>
                 <button type="reset" class="btn btn-danger">Reset</button>
             </div>
