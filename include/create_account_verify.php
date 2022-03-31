@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 //if username is not in db account is created                
                 if($conn->query(" INSERT INTO `users`(`user_name`,`password`,`user_type`,`user_pic`) VALUES('$u_user_name','$u_password','user',null) ")){                    
                     session_start();
-                    $_SESSION['user_id'] = $user_count;
+                    $_SESSION['user_id'] = $conn->insert_id;
                     $_SESSION['user_name'] = $u_user_name;
                     $_SESSION['user_type'] = "user";
                     $conn->close();
