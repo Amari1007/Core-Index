@@ -27,7 +27,7 @@ if($result = $conn->query("SELECT * FROM `leagues` WHERE 1 ")){
         <div class="row">
             
             <div class="col-sm-6"> 
-                <h3>Africa</h3>
+                <h3>Malawi</h3>
                 <?php 
                     if($result = $conn->query("SELECT * FROM `leagues` WHERE continent='Africa' ")){
                     if($result->num_rows > 0){
@@ -50,14 +50,18 @@ if($result = $conn->query("SELECT * FROM `leagues` WHERE 1 ")){
                 ?>
             
             </div>
-            <div class="col-sm-6"> 
-                <h3>Europe</h3>
-                <table class="table table-hover">
-                    <tr><td>English Premier League</td></tr>                
-                    <tr><td>UEFA Champions League</td></tr>                
-                </table>
             
-            </div>        
+            <div class="col-sm-6">
+                <h3>Cup Competitions</h3>
+                <p>
+                    
+                    <a href="#">
+                        <img src="Media/Leagues/airteltop8.png" width="70" class="img-rounded">
+                        Airtel Top 8
+                    </a>                    
+                </p>            
+            </div>
+            
         </div>
         
     </main>

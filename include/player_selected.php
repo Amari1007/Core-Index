@@ -22,7 +22,10 @@ if($result = $conn->query("SELECT * FROM players WHERE player_id=$playerid LIMIT
             $player_info = "
             
  <table class='table table-hover' style='max-width:50%'>
-        <caption> <h2 style='color:black'>$fname $lname</h2> </caption>
+        <caption> <h2 style='color:black'>$fname $lname ".(
+                isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'admin' && isset($_SESSION['user_name']) ?"<small>&bull; <a href='editplayer_view.php?playerid=$player_ID&club=$club&nationality=$nationality' title='Edit $fname $lname'>Edit Player?</a></small>":""
+            
+            )."</h2> </caption>
         
         <tr>		
             <td colspan='2' style='text-align:center;'><img src='$player_pic' width='130' onerror='player_imgerror(this)' alt='image N/A' title='$fname $lname'></td>		

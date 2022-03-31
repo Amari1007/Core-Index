@@ -50,7 +50,7 @@ if(empty($_GET['playerid'])){
 
     <main class="container-fluid">
         <div class="jumbotron" style="background:white ">
-            <h2>Edit <?php echo $fname.' '.$lname ?> player profile &bull;  <small>Current Season 2021/22</small> &bull; <img width="80" class="img-circle" src="<?php echo $player_pic ?>" title="<?php echo $fname.' '.$lname ?>" onerror="player_imgerror(this)" alt="<?php echo $fname.' '.$lname.'.jpg' ?>">  </h2>
+            <h2>Edit <?php echo $fname.' '.$lname ?> player profile &bull;  <small>Current Season 2022/23</small> &bull; <img width="80" class="img-circle" src="<?php echo $player_pic ?>" title="<?php echo $fname.' '.$lname ?>" onerror="player_imgerror(this)" alt="<?php echo $fname.' '.$lname.'.jpg' ?>">  </h2>
             
         </div>
         
