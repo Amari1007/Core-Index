@@ -44,13 +44,18 @@
                 </button>
 
                 <ul class="dropdown-menu">
+                    <?php if( isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SESSION['user_name']) ): ?>
+                        <li><a style="color:red;font-weight:bold">(Admin Account)</a></li>
+                        <li class="divider"></li>
+                    <?php endif ?>                    
+                    
                     <li><a href="include/log_out.php" title="Logout?">Logout</a></li>
                     <li class="divider"></li>
                     <li><a href="#">Settings</a></li>
                 </ul>
             </div>
             
-			<?php elseif( !isset($_SESSION['user_id']) || !isset($_SESSION['user_name']) ): ?>
+			<?php elseif( !isset($_SESSION['user_id']) && !isset($_SESSION['user_name']) ): ?>
             <div class="navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="active">
