@@ -12,11 +12,11 @@ require_once("include/coreDB.php");
     <?php require_once("include/header.php") ?>
 
     <main class="container">
-        <h3>Database List</h3>
+        <h3>Database List <small>(Showing Last 30 Players Added)</small></h3>
         <div class="table-responsive">
         <?php 
 
-        if($result = $conn->query("SELECT * FROM players ORDER BY player_ID DESC")){
+        if($result = $conn->query("SELECT * FROM players ORDER BY player_ID DESC LIMIT 30")){
             
             //execute query in database and store results in $result var
             if($result->num_rows > 0 ){

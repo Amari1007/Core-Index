@@ -1,10 +1,11 @@
 <?php 
+session_start();
 if($_SERVER['REQUEST_METHOD']=='POST'){
     require_once("coreDB.php");
     $data = $_POST['data'];
     
     if($result = $conn->query("SELECT * FROM players where fname LIKE'%$data%' OR lname LIKE'%$data%' ORDER BY lname ASC, fname DESC LIMIT 7")){
-        if($result->num_rows>0){
+        if($result->num_rows>0){            
             while($row = $result->fetch_assoc()){
                 extract($row);
                 echo("       
@@ -39,7 +40,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 <img src='$player_pic' width='50' onerror='player_imgerror(this)'>
                 $fname $lname
                 <span style='font-size:14px;display:block;font-weight:bold;'>$club</span>
-                </a>
+                </a>".(
+                        isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'admin' && isset($_SESSION['user_name']) ?"<a href='editplayer_view.php?playerid=$player_ID&club=$club&nationality=$nationality' title='Edit $fname $lname'><b>Edit?</b></a>":""                    
+                      )."
                 </li>
                 ");
             }
