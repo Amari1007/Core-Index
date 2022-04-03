@@ -22,9 +22,7 @@
     ";
 
     while($row = $result->fetch_assoc()){
-    extract($row);  
-//        $goals = (int)$goals;
-//        $assists = (int)$assists;
+    extract($row); 
 
     echo "
     <tr>
