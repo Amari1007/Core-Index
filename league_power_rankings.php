@@ -31,9 +31,9 @@ else{
             
         <?php 
     
-        /**code below only selects from forwards (ST,CF,LW,RW) will be revisited later**/
+        /**code below only selects from DEFENDERS (CB,LB,RB,RWB,LWB) will be revisited later**/
 
-        if($result = $conn->query("SELECT * FROM `player_rankings` WHERE league_code='$code' OR league='$league_name' limit 15 ")){
+        if($result = $conn->query("SELECT * FROM `player_points` order by rating*1 DESC limit 50 ")){
 
         //execute query in database and store results in $result var
         if($result->num_rows > 0 ){
@@ -45,7 +45,7 @@ else{
         <th class='player_photo' style='width:10%'></th>
         <th class='player_nationality' style='width:5%'></th>
         <th class='player_name' style='width:20%'></th>
-        <th class='player_score' style='width:15%'>Score</th>
+        <th class='player_score' style='width:15%'>Rating</th>
         <th class='player_position' style='width:5%'>Position(s)</th>
         <th class='player_age' style='width:5%'>Age</th>
         <th class='player_club' style='width:35%'>Club</th>              
@@ -132,7 +132,7 @@ else{
         <td style='padding-top:25px'> <a class='player_id_$player_ID' style='cursor:pointer' title='Get to know $fname $lname'>$fname $lname</a>
         </td>
         
-        <td style='padding-top:25px'> <span class='score'>".(number_format($score))." </span>".( $row_num==1 ? "<img src='icons_pack/trophy-outline.svg' width='25'> ": null )."</td>
+        <td style='padding-top:25px'> <span class='score'>$rating/10</span>".( $row_num==1 ? "<img src='icons_pack/trophy-outline.svg' width='25'> ": null )."</td>
 
         <td style='padding-top:25px'> <span class='$position'>$position</span> </td>
 
