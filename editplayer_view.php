@@ -2,22 +2,26 @@
 session_start();
 require_once("include/coreDB.php");
 
-if(empty($_GET['playerid'])){
-    header("Location: editplayer.php"); //redirects if playerid is invalid
-        
-}else{
-    $id = $_GET['playerid'];
-//    $position = $_GET['position']; not yet available
-}
+if(isset($_SESSION['user_name'])  ){
+    if(empty($_GET['playerid'])){
+        header("Location: editplayer.php"); //redirects if playerid is invalid
 
-    if($result = $conn->query("select * from players where player_ID=$id")){ 
-        if($result->num_rows > 0){            
-            while($row = $result->fetch_assoc()){ 
-               extract($row); //You can retrieve all the values from an array with words as keys
+    }else{
+        $id = $_GET['playerid'];
+    //    $position = $_GET['position']; not yet available
+    }
+
+        if($result = $conn->query("select * from players where player_ID=$id")){ 
+            if($result->num_rows > 0){            
+                while($row = $result->fetch_assoc()){ 
+                   extract($row); //You can retrieve all the values from an array with words as keys
+            }
         }
     }
-}
-     
+ 
+}else[
+    
+] 
 
 ?>
 
@@ -25,6 +29,11 @@ if(empty($_GET['playerid'])){
 <html lang="en">
     <?php require_once("include/headCode.php") ;?>    
     <head>
+        <script>
+            document.title = "Edit Player: <?php echo "$fname $lname" ?>"
+        
+        </script>
+        
         <link rel="stylesheet" type="text/css" href="css/communityeditplayerphp/style.css"/>
         
         <script src="js/player_bio_update.js">            

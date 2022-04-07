@@ -17,6 +17,12 @@ if($result = $conn->query("SELECT * FROM `leagues` WHERE 1 ")){
 <!DOCTYPE html>
 <html lang="en">
     <?php require_once("include/headCode.php") ;?>    
+    <head>
+        <script>
+            document.title = "Competitions";
+        </script>
+    
+    </head>
     
     <body>
     
