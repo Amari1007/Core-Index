@@ -20,10 +20,10 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
         }
     }
  
-}else[
-    header("location:sign_up.php");
+}else{
+    header("location:sign_in.php");
     exit();
-] 
+}
 
 ?>
 

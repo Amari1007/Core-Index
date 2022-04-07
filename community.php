@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SESSION['user_name']) ){
+    
+}else{
+    header("location:sign_in.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>

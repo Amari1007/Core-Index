@@ -1,6 +1,13 @@
 <?php
 session_start();
-require_once("include/coreDB.php");
+
+if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SESSION['user_name']) ){
+    require_once("include/coreDB.php");
+    
+}else{
+    header("location: sign_in.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +19,7 @@ require_once("include/coreDB.php");
     <?php require_once("include/header.php") ?>
 
     <main class="container">
-        <h3>Database List <small>(Showing Last 30 Players Added)</small></h3>
+        <h3>Database List <small>(Showing Last 30 Players Edited)</small></h3>
         <div class="table-responsive">
         <?php 
 
@@ -21,7 +28,7 @@ require_once("include/coreDB.php");
             //execute query in database and store results in $result var
             if($result->num_rows > 0 ){
         
-        echo "<table class='table table-striped'>
+        echo "<table class='table table-hover'>
               <thead>
               <tr>
               <th class='player_photo' style='width:10%'>Photo</th>

@@ -1,11 +1,18 @@
 <?php
 session_start();
-require_once("include/coreDB.php");
+
+if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SESSION['user_name']) ){
+    require_once("include/coreDB.php");    
+}else{
+    header("location: sign_in.php");
+    exit();
+}
 
 $message = ' ';
 if(isset($_GET['message'])){
     $message = "</br>".$_GET['message'];
 }
+
 ?>
 
 <!DOCTYPE html>
