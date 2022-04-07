@@ -2,7 +2,8 @@
 session_start();
 require_once("include/coreDB.php");
 
-if(isset($_SESSION['user_name'])  ){
+if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SESSION['user_name']) ){
+    
     if(empty($_GET['playerid'])){
         header("Location: editplayer.php"); //redirects if playerid is invalid
 
@@ -20,7 +21,8 @@ if(isset($_SESSION['user_name'])  ){
     }
  
 }else[
-    
+    header("location:sign_up.php");
+    exit();
 ] 
 
 ?>
