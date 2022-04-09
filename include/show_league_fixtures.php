@@ -11,49 +11,82 @@ else{
 }
 
 
-if($result = $conn->query("SELECT * FROM `mw-fixtures` WHERE date like '$month' limit 10")){
+if($result = $conn->query("SELECT * FROM `mw-fixtures` WHERE date like '$month' limit 1")){
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
             extract($row);
                 
             $date = strtotime($date);
-            $time = strtotime($time); 
+            $time = strtotime($time); //converts to time value if original value is text
+            $time = date("H:i",$time); // converts to string Hour:Minute time format
+            $scores = " ";
                 
-            if($status=='played'){
-                $match_link = " match_view.php?match_ID=$match_ID&code=$code ";
+            if($status==='live'){
+                $scores = "
+                <div id='scores'>
+                <a href='match_view.php?match_ID=$match_ID&competition=$competition'>
+                    <div style='float:left;width:49%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$home_goals</div>
+
+                    <div style='float:right;width:50%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$away_goals </div>
+                </a>
+                <span style='text-align:center;display:block;color:#2866f6;font-size:13px'>&bull; live</span>
+                </div>                
+                ";
             }
-            else if($status=='not-played'){
-                 $match_link = date("H:i",$time);
+            else if($status==='upcoming'){
+                $scores = "
+                <div id='scores'>
+                <a>
+                    <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>$time</div> 
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:13px'></span>
+                </div>
+                "; 
             }
-            else if($status=='live'){
-                $match_link = " $home_goals-$away_goals ";
+            else if($status=='played'){ 
+                $scores = "                
+                <div id='scores'>
+                <a>
+                    <div style='float:left;width:49%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$home_goals</div>
+
+                    <div style='float:right;width:50%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$away_goals </div>
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:12px'>FT</span>
+                </div>    
+                ";
             }
-            else if($status=='pending'){
-                $match_link = " $home_goals-$away_goals ";
-            }
-            else if($status=='disable'){
-                $match_link = " $home_goals-$away_goals ";
+            else if($status=='report'){                
+                $scores = "
+                <div id='scores'>
+                <a href='match_view.php?match_ID=$match_ID&competition=$competition'>
+                    <div style='float:left;width:49%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$home_goals</div>
+
+                    <div style='float:right;width:50%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$away_goals</div>
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:12px'>FT</span>
+                </div> 
+                ";
             }
             else{
-                $match_link = date("H:i",$time);
+                $scores = "                
+                <div id='scores'>
+                <a>
+                    <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>$time</div> 
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:13px'></span>
+                </div>
+                ";
             }
             
             //code below creates a new table every time
             echo " 
                     <ul>
 						<li>
-							<div id='home_team' style='width:45%;float:left;text-align:right;overflow:hidden;'>$home_team</div>
+							<div id='home_team' style='width:46%;float:left;text-align:right;overflow:hidden;'>$home_team</div>
                             
-                            <a href='$match_link'>
-                            <div id='scores' style='width:10%;float:none;'>
-							<div style='float:left;width:48%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:5px;'>$home_goals</div>
+                            $scores
                             
-                            <div style='float:right;width:50%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:5px;'>$away_goals</div>
-                            
-                            </div>
-							</a>
-                            
-                            <div id='away_team' style='width:45%;float:right;text-align:left;overflow:hidden;'>$away_team 
+                            <div id='away_team' style='width:46%;float:right;text-align:left;overflow:hidden;'>$away_team 
                             ".(
                                 isset($_SESSION['user_type'])&&isset($_SESSION['user_id'])?" <a data-toggle='collapse' data-target='#view_$match_ID'> &bull; Edit ?  </a>
                            
