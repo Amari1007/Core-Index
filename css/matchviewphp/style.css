@@ -10,7 +10,7 @@
 }
 
 .teams{
-    border: 1px solid black;
+    border: 0px solid black;
     text-align: center;
     padding: 2px;
     min-height:150px;
@@ -22,58 +22,6 @@
 */
     
 }
-
-/************** TEAM VOTING **************/
-
-.team_voting{
-    border: 1px solid black;
-    padding-top: 40px;   
-}
-
-.team_voting img:hover{
-    cursor:pointer;
-    width: 200px;
-    transition-duration: 1s;
-}
-
-.votes_bar{
-     height: 40px;
-     width: 90%;
-     margin: 10px auto;
-     display: inline-block;
-     color: white;
-/*     border: 1px solid black;*/
-}
-
-.votes_bar .home_votes, .votes_bar .away_votes{
-/*    height: 50%;*/
-/*    width: 50px;*/
-    display: inline;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.votes_bar .home_votes{
-    background-color: forestgreen;
-    width: 50%;
-    float: left;
-    height: 100%;
-    text-align: left;
-    padding: 5px;
-}
-
-.votes_bar .away_votes{
-    background-color: #e8491d;
-    width: 50%;
-    float: right;
-    height: 100%;
-    text-align: right;
-    padding: 5px;
-}
-
-/*****************************************/
-
-
 
 .home_team, .away_team{
 /*    border: 1px solid black;*/
@@ -235,5 +183,3 @@
     width: 50%;
      min-height: 300px;
 }
-
-/********** MAX WIDTH=650 **********/

@@ -19,7 +19,7 @@ if($result = $conn->query("SELECT * FROM `leagues` WHERE 1 ")){
     <?php require_once("include/headCode.php") ;?>    
     <head>
         <script>
-            document.title = "Competitions";
+            document.title = "Competitions & Tournaments";
         </script>
     
     </head>
@@ -35,7 +35,7 @@ if($result = $conn->query("SELECT * FROM `leagues` WHERE 1 ")){
             <div class="col-sm-6"> 
                 <h3>Malawi</h3>
                 <?php 
-                    if($result = $conn->query("SELECT * FROM `leagues` WHERE continent='Africa' ")){
+                    if($result = $conn->query("SELECT * FROM `competitions_tournaments` WHERE country='Malawi' limit 1")){
                     if($result->num_rows > 0){
                     while($row = $result->fetch_assoc()){
                     extract($row);
@@ -59,8 +59,7 @@ if($result = $conn->query("SELECT * FROM `leagues` WHERE 1 ")){
             
             <div class="col-sm-6">
                 <h3>Cup Competitions</h3>
-                <p>
-                    
+                <p>                    
                     <a href="#">
                         <img src="Media/Leagues/airteltop8.png" width="70" class="img-rounded">
                         Airtel Top 8

@@ -1,15 +1,17 @@
 <?php 
 require_once("coreDB.php");
 
-if(!isset($_GET['match_ID'])){ header("Location:../leagues.php");
-exit();
+if(!isset($_GET['match_ID'])){ 
+    header("Location:../leagues.php");
+    $conn->close();
+    exit();
 }
 else{
 extract($_GET);  
 }
 
 
-if($result = $conn->query("SELECT * FROM `mw-tsl-fixtures` WHERE match_ID=$match_ID LIMIT 1")){
+if($result = $conn->query("SELECT * FROM `fixtures` WHERE match_ID=$match_ID LIMIT 1")){
     if($result->num_rows > 0){
     while($row = $result->fetch_assoc()){
         extract($row);
