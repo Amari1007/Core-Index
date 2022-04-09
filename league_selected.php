@@ -15,9 +15,13 @@ else{
 <html lang="en" dir="ltr">
     <?php require_once("include/headCode.php") ;?>    
     <head>
-    <link rel="stylesheet" type="text/css" href="css/league_selectedphp/style.css"/>
+        <script>
+            document.title = " <?php echo $league_name ?> ";
+        </script>
         
-    <script>
+        <link rel="stylesheet" href="css/league_selectedphp/style.css"/>
+        
+        <script>
         $(document).ready(function(){
             $("#team-list h4").click(function(){
                 $("#team-list ul").fadeToggle(500);

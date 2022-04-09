@@ -26,27 +26,6 @@ else{
         
     <?php require_once("include/league_navtab.php") ?>
         
-        <div id="dates">
-                 <button class="btn" value="20%" id="default"><strong>ALL</strong></button>
-                 <button class="btn" value="2021-01%"><strong>JAN</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-02%"><strong>FEB</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-03%"><strong>MAR</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-04%"><strong>APR</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-05%"><strong>MAY</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-06%"><strong>JUN</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-07%"><strong>JUL</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-08%"><strong>AUG</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-09%"><strong>SEP</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-10%"><strong>OCT</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-11%"><strong>NOV</strong> <br/> 2021</button>
-                 <button class="btn" value="2021-12%"><strong>DEC</strong> <br/> 2021</button>  
-                 <button class="btn" value="2022-01%"><strong>JAN</strong> <br/> 2022</button>  
-                 <button class="btn" value="2022-02%"><strong>FEB</strong> <br/> 2022</button>  
-                 <button class="btn" value="2022-03%"><strong>MAR</strong> <br/> 2022</button>  
-                 <button class="btn" value="2022-04%"><strong>APR</strong> <br/> 2022</button>  
-                 <button class="btn" value="2022-05%"><strong>MAY</strong> <br/> 2022</button>  
-        </div>
-        
         <script>
             $(document).ready(function(){                
                 $('#default').css({"background-color": "lightgrey"});         
@@ -66,18 +45,19 @@ else{
                     },
                     function(data,status,ob){
                     if(status=='success'){
-                       $("main").html(data);
+                       $("#display").html(data);
                        }
                         else{
-                        $("main").html("<div class='jumbotron'> <h2>Couldn't get fixtures</h2> </div>");
+                        $("#display").html("<div class='jumbotron'> <h2>Couldn't get fixtures</h2> </div>");
                         }
 
                     }                    
                 );
+                
                 // code below retrieves fixtures from the database according to the month selected
-                $("button").click(function(){  
+                $("main button").click(function(){  
                           
-                    $('button').css({"background-color": "white"});
+                    $('main button').css({"background-color": "white"});
                     $(this).css({"background-color": "lightgrey"});
                         
                     
@@ -97,11 +77,11 @@ else{
                         },
                         function(data,status,ob){
                         if(status=='success'){
-                           $("main").html(data);
+                           $("#display").html(data);
                            }
                             else{
                                 //display error if unsuccessful
-                            $("main").html("<div class='jumbotron'> <h2>Couldn't get fixtures</h2> </div>");
+                            $("#display").html("<div class='jumbotron'> <h2>Couldn't get fixtures</h2> </div>");
                             }
                            
                         }                    
@@ -111,8 +91,35 @@ else{
         
         </script>
     
-        <main class="container">
-        <!--Data here from include show_league_fixtures.php file -->
+        <main class="container-fluid">
+            
+        <div id="dates">
+             <button class="btn" value="20%" id="default"><strong>ALL</strong></button>
+             <button class="btn" value="2021-01%"><strong>JAN</strong> <br/> 2021</button>
+             <button class="btn" value="2021-02%"><strong>FEB</strong> <br/> 2021</button>
+             <button class="btn" value="2021-03%"><strong>MAR</strong> <br/> 2021</button>
+             <button class="btn" value="2021-04%"><strong>APR</strong> <br/> 2021</button>
+             <button class="btn" value="2021-05%"><strong>MAY</strong> <br/> 2021</button>
+             <button class="btn" value="2021-06%"><strong>JUN</strong> <br/> 2021</button>
+             <button class="btn" value="2021-07%"><strong>JUL</strong> <br/> 2021</button>
+             <button class="btn" value="2021-08%"><strong>AUG</strong> <br/> 2021</button>
+             <button class="btn" value="2021-09%"><strong>SEP</strong> <br/> 2021</button>
+             <button class="btn" value="2021-10%"><strong>OCT</strong> <br/> 2021</button>
+             <button class="btn" value="2021-11%"><strong>NOV</strong> <br/> 2021</button>
+             <button class="btn" value="2021-12%"><strong>DEC</strong> <br/> 2021</button>  
+             <button class="btn" value="2022-01%"><strong>JAN</strong> <br/> 2022</button>  
+             <button class="btn" value="2022-02%"><strong>FEB</strong> <br/> 2022</button>  
+             <button class="btn" value="2022-03%"><strong>MAR</strong> <br/> 2022</button>  
+             <button class="btn" value="2022-04%"><strong>APR</strong> <br/> 2022</button>  
+             <button class="btn" value="2022-05%"><strong>MAY</strong> <br/> 2022</button>  
+        </div>
+       
+            
+            <div id="display">
+            <!--Data here from include/show_league_fixtures.php file -->
+                
+            </div>
+            
         </main>
 
    <?php include_once("include/footer.php"); ?>
