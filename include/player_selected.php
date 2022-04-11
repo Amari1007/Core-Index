@@ -213,7 +213,7 @@ $position_data = ''; //this variable holds output information
 
 /******************IF POSITION IS MIDFIELDER**********************/
 if($position=='CDM' || $position=='CM' || $position=='CAM' || $position=='LM' || $position=='RM'){
-    if($result = $conn->query(" SELECT * FROM midfielders_rank WHERE player_ID=$player_ID LIMIT 1 ")){
+    if($result = $conn->query(" SELECT * FROM players WHERE player_ID=$player_ID LIMIT 1 ")){
         if($result->num_rows>0){
             while($row = $result->fetch_assoc()){
             extract($row);
@@ -372,7 +372,7 @@ if($position=='CDM' || $position=='CM' || $position=='CAM' || $position=='LM' ||
 
 /******************IF POSITION IS FORWARD************************/
 else if($position=='ST' || $position=='CF' || $position== 'LW' || $position=='RW'){
-     if($result = $conn->query(" SELECT * FROM forwards_rank WHERE player_ID=$player_ID LIMIT 1 ")){
+     if($result = $conn->query(" SELECT * FROM players WHERE player_ID=$player_ID LIMIT 1 ")){
          if($result->num_rows>0){
              while($row = $result->fetch_assoc()){
                  extract($row); //for forwards, this will override above extract()
@@ -703,7 +703,7 @@ else if( $position=='CB'){
 
 /******************FULL-BACKS****************************/
 else if($position=='LB' || $position=='RB' || $position=='RWB' || $position=='LWB'){
-    if($result = $conn->query(" SELECT * FROM defenders_rank WHERE player_ID=$player_ID LIMIT 1")){
+    if($result = $conn->query(" SELECT * FROM players WHERE player_ID=$player_ID LIMIT 1")){
         if($result->num_rows>0){
             while($row = $result->fetch_assoc()){
                 extract($row); //for CB, this will override above extract()

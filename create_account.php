@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
+if(isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
     header("location: index.php?already_logged_in");
 }
 
@@ -20,7 +20,7 @@ require_once("include/coreDB.php");
          <link rel="stylesheet" href='css/create_accountphp/style.css'> 
     </head>
 
-    <body onload="alert('Logged in as <?php echo $_SESSION['user_name'] ?>')">    
+    <body>    
     <?php require_once("include/header.php") ?>
     
     <main class="container-fluid">

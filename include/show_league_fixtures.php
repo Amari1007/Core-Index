@@ -11,12 +11,13 @@ else{
 }
 
 
-if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' limit 1")){
+if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ")){
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
             extract($row);
                 
             $date = strtotime($date);
+            $date = date("d M, y",$date); //converts date milliseconds to string date
             $time = strtotime($time); //converts to time value if original value is text
             $time = date("H:i",$time); // converts to string Hour:Minute time format
             $scores = " ";
@@ -82,11 +83,14 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' lim
             echo " 
                 <ul>
                     <li>
-                        <div id='home_team' style='width:46%;float:left;text-align:right;overflow:hidden;'>$home_team</div>
+                        <div id='home_team' style='width:46%;float:left;text-align:right;overflow:hidden;'>$home_team
+                        <span style='font-size:12px;float:left'>&bull; $date &bull;</span>
+                        </div>
 
                         $scores
 
                         <div id='away_team' style='width:46%;float:right;text-align:left;overflow:hidden;'>$away_team 
+                        
                         ".(
                             isset($_SESSION['user_type'])&&isset($_SESSION['user_id'])?" <a data-toggle='collapse' data-target='#view_$match_ID'> &bull; Edit ?  </a>
 
