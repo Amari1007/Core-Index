@@ -39,7 +39,7 @@ else{
             
         <?php 
     
-        if($result = $conn->query("select *, CONCAT(gf-ga) as gd, CONCAT(win*3 + draw*1) AS points,CONCAT(win+draw+loss) AS played from `mw-tsl-table`  ORDER BY points DESC,gd DESC ")){ 
+        if($result = $conn->query("select *, CONCAT(gf-ga) as gd, CONCAT(win*3 + draw*1) AS points,CONCAT(win+draw+loss) AS played from `mw-tsl-table_21-22`  ORDER BY points DESC,gd DESC ")){ 
             if($result->num_rows > 0){
                 echo "<table class='table table-striped'>
                       <thead>

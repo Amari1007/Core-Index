@@ -4,29 +4,9 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
         while($row = $result->fetch_assoc()){
             extract($row);
             $date = strtotime($date); //converts date(string) in DB to real date;
-
-        //code below gets home and away club badges
-        if($get_home_pic = $conn->query("SELECT club_pic FROM `clubs` WHERE club_name='$home_team' LIMIT 1")){
-        if($get_home_pic->num_rows > 0){
-        while($set_home_pic = $get_home_pic->fetch_assoc()){
-            $home_pic = $set_home_pic['club_pic'];
-
-        if($get_away_pic = $conn->query("SELECT club_pic FROM `clubs` WHERE club_name='$away_team' LIMIT 1")){
-        if($get_away_pic->num_rows > 0){
-        while($set_away_pic = $get_away_pic->fetch_assoc()){
-           $away_pic = $set_away_pic['club_pic'];
-        }
-        }else{$away_pic='';}
-        }else{$away_pic='';}
-
-
-        }
-    }else{$home_pic='';$away_pic='';}
-}else{$home_pic='';$away_pic='';}
-
-
-            //code below will decide $minutes_played output
-
+            
+            
+            //code below will decide $minutes_played output;
             if($minutes_played==''||$minutes_played==null||empty($minutes_played)||!isset($minutes_played) ){
                 $minutes_played='';
             }

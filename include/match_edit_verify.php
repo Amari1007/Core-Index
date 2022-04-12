@@ -5,8 +5,8 @@ require("coreDB.php");
 if($_SERVER['REQUEST_METHOD']==='POST'){
     extract($_POST);    
     
-    if($conn->query(" UPDATE `fixtures` SET `referee` = '$data' WHERE match_ID = $match_ID; ") === true){
-        echo "success"        ;
+    if($conn->query("select * from fixtures where venue='$data' ")){
+        echo "success";
     }else{
         echo "failed OP 2";
     }

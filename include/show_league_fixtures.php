@@ -11,7 +11,7 @@ else{
 }
 
 
-if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ")){
+if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORDER BY `date` DESC ")){
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
             extract($row);
@@ -97,7 +97,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' "))
                         </div>
                     </li>                                                       
                         <div id='view_$match_ID' class='collapse'>
-                            <form method='post' id='event_form_$match_ID' onsubmit='verify_edit(this)' name='$match_ID' class='form-horizontal' style='border:1px solid black;margin:auto;width:60%;text-align:center;background:#333333;color:white;border-radius:7px'>
+                            <form method='post' id='event_form_$match_ID' name='$match_ID' class='form-horizontal' style='border:1px solid black;margin:auto;width:60%;text-align:center;background:#333333;color:white;border-radius:7px'>
                                 <caption> <h4>Match ID:$match_ID</h4> </caption>
 
                                 <div class='form-group'>
@@ -130,10 +130,29 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' "))
                                     </button>
                                 </div>
                             </form>                                
-                        </div>":"</div>"
+                        </div>
+                        
+                        <script> 
+                            $('document').ready(function(){
+                                $('#event_form_$match_ID').submit(
+                                    function(){
+                                        var venue = $(this).form.venue.val();
+                                        alert(venue);
+                                        console.log(error);
+                                    }
+                                    
+                                );
+                                
+                            });
+                            
+                        </script>
+                        
+                        ":"</div>"
 
                         )."                        
                 </ul>  
+                
+                
 
                  ";              
         }   

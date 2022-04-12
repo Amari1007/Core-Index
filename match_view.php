@@ -76,14 +76,13 @@ else{
     
     <main class="container">  
         <?php 
-            require("include/retrieve_match_data.php");
+            require("include/retrieve_match_header.php");
         ?>   
         
         <div id="bars"> 
             <div class="jumbotron">
-            <h3>Loading Data</h3>
+            <h3>Nothing to see here yet...</h3>
             </div>
-                        
         </div>
         
         </main>

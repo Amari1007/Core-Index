@@ -72,7 +72,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
                 });
             });
         
-        </script>
+    </script>
 
     <main class="container-fluid">
         
@@ -110,15 +110,10 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
             
         </div>
         
-        <div id="add_event" style="display:none">
-            Add Event        
-        </div>
-        
     </main>
         
     <!--code below alters edit and add buttons when clicked-->
-    <script>
-        
+    <script>        
         function show_add_event(x){
             $("#selectors h3").removeClass().addClass("btn btn-default");
             $(x).removeClass().addClass("btn btn-primary");
@@ -133,39 +128,6 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
             $("#edit_event").show(300)            
         }
         
-    </script>
-        
-    <script>
-        function verify_edit(x){
-            //var venue = x.venue.value;
-            var referee = x.venue.value;
-            var match_ID = x.name; //get match id number
-            
-            //send data to save in db and reload page if true
-            $.post(
-                "include/match_edit_verify.php",
-                {
-                    data:referee,
-                    match_ID:match_ID,
-                    user_type:<?php echo $_SESSION['user_type'] ?>
-                },
-                function(data,status,ob){
-                    if(status=='success'){
-                        if(data=='success'){
-                          window.open("wikipedia.org","_blank");
-                           }else{
-                               alert("Op failed 2");
-                           }
-                        //if successful reload the page
-                       window.open("google.com","_blank");
-                    }else{
-                           alert("Op failed 1");
-                       }
-                       
-                }            
-            );
-            
-        }
     </script>
         
    <?php include_once("include/footer.php"); ?>

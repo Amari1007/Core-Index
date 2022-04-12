@@ -200,7 +200,7 @@ else{
         <div class="table-responsive">
         <?php 
 
-        if($result = $conn->query("select *, CONCAT(win*3 + draw*1) AS points, CONCAT(win+draw+loss) AS played, CONCAT(gf-ga) AS gd from `$code-table` ORDER BY points DESC,gd DESC LIMIT 8")){
+        if($result = $conn->query("select *, CONCAT(win*3 + draw*1) AS points, CONCAT(win+draw+loss) AS played, CONCAT(gf-ga) AS gd from `$code-table_21-22` ORDER BY points DESC,gd DESC LIMIT 8")){
         if($result->num_rows > 0){
         echo "<table class='table table-hover table-responsive' style='width:100%; margin:auto'>
               <thead>
@@ -264,41 +264,81 @@ else{
                 
             @$conn = new mysqli("localhost","Admin","123abc","core");
  
-            if($result=$conn->query("SELECT * FROM `$code-fixtures` WHERE date like '2021-10%' limit 5 ")){
+            if($result=$conn->query("SELECT * FROM `fixtures` WHERE date like '2021-10%' limit 5 ")){
             if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
             extract($row);                
                 
-                    $date = strtotime($date);
-                    $time = strtotime($time); 
-                    $code = !isset($code)? "mw-tsl" :$code ;
+                $date = date("d M, y",strtotime($date) ); //converts date milliseconds to string date
+                $time = strtotime($time); //converts to time value if original value is text
+                $time = date("H:i",$time); // converts to string Hour:Minute time format
+                $scores = " "; //USED LATER IN SCRIPT
+                
+            if($status==='live'){
+                $scores = "
+                <div id='scores'>
+                <a href='match_view.php?match_ID=$match_ID&code=$competition_code&competition=$competition'>
+                    <div style='float:left;width:49%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$home_goals</div>
 
-                    if($status=='played'){
-                        $match_link = " <a href='match_view.php?match_ID=$match_ID&code=$code&league_name=$league_name&fixtures=$code-fixtures'>$home_goals-$away_goals</a> ";
-                    }
-                    else if($status=='not-played'){
-                         $match_link = date("H:i",$time);
-                    }
-                    else if($status=='live'){
-                        $match_link = " $home_goals-$away_goals ";
-                    }
-                    else if($status=='pending'){
-                        $match_link = " $home_goals-$away_goals ";
-                    }
-                    else if($status=='disable'){
-                        $match_link = " $home_goals-$away_goals ";
-                    }
-                    else{
-                        $match_link = date("H:i",$time);
-                    }            
+                    <div style='float:right;width:50%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$away_goals </div>
+                </a>
+                <span style='text-align:center;display:block;color:#2866f6;font-size:13px'>&bull; live</span>
+                </div>                
+                ";
+            }
+            else if($status==='upcoming'){
+                $scores = "
+                <div id='scores'>
+                <a>
+                    <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>$time</div> 
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:13px'></span>
+                </div>
+                "; 
+            }
+            else if($status=='played'){ 
+                $scores = "                
+                <div id='scores'>
+                <a>
+                    <div style='float:left;width:49%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$home_goals</div>
+
+                    <div style='float:right;width:50%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$away_goals </div>
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:12px'>FT</span>
+                </div>    
+                ";
+            }
+            else if($status=='report'){                
+                $scores = "
+                <div id='scores'>
+                <a href='match_view.php?match_ID=$match_ID&code=$competition_code&league_name=$competition'>
+                    <div style='float:left;width:49%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$home_goals</div>
+
+                    <div style='float:right;width:50%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$away_goals</div>
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:12px'>FT</span>
+                </div> 
+                ";
+            }
+            else{
+                $scores = "                
+                <div id='scores'>
+                <a>
+                    <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>$time</div> 
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:13px'></span>
+                </div>
+                ";
+            }                  
                
             //code below creates a new table every time
             echo " 
-            <span>".date('M D d',$date)."</span>
+            <span style='font-weight:bold;font-size:12px;font-family:helvetica;'>$date</span>
+            
             <table class='table table-hover table-responsive' style='width:100%; margin:auto'>
             <tr>
             <td style='width:40%'>$home_team</td> 
-            <td style='width:20%' title='See Match Details'>$match_link</td> 
+            <td style='width:20%' title='See Match Details'>$scores</td> 
             <td style='width:40%'>$away_team</td> 
             </tr>  
             </table>   
