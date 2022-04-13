@@ -3,26 +3,48 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
             extract($row);
-            $date = strtotime($date); //converts date(string) in DB to real date;
             
+            $date = strtotime($date);
+            $date = date("d M, Y",$date); //converts date milliseconds to string date
+            $time = strtotime($time); //converts to time value if original value is text
+            $time = date("H:i",$time); // converts to string Hour:Minute time format
+            $scores = " ";
             
-            //code below will decide $minutes_played output;
-            if($minutes_played==''||$minutes_played==null||empty($minutes_played)||!isset($minutes_played) ){
-                $minutes_played='';
+            //code below will display score or KO time
+            if($status == 'live'){
+                $scores = " 
+                
+                <div class='home_goals'>
+                    $home_goals
+                </div>
+                
+                <div class='away_goals'>
+                    $away_goals
+                </div>
+                
+                ";
             }
-            else if($minutes_played=='FT'||$minutes_played=='HT'){
-                $minutes_played = "<p id='minutes_played'>$minutes_played</p> ";
+            elseif($status == 'upcoming'){
+                $scores = " 
+                
+                <div style='float:left;width:100%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>
+                    $time
+                </div>
+                
+                ";
+                
             }
-            else{
-                $minutes_played='';
+            elseif($status == 'report'){
+                
             }
-
+            elseif($status == 'played'){
+                
+            }
 
             echo"
             <div class='match_info'> 
 
-            <h5>$league_name &bull; ". 
-                date("l d M Y",$date)."</h5>
+            <h5>$league_name &bull; $date</h5>
 
             <div class='teams'>
 
@@ -32,15 +54,29 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
             </div>
 
             <div class='score'> 
-            <span class='home_goals'>".($status=='not-played'? '-':$home_goals)."</span>
-            <span class='away_goals'>".($status=='not-played'? '-':$away_goals)."</span>"
-            .($status=='not-played'? ' ':$minutes_played)."                    
+                $scores
             </div>
 
             <div class='away_team'> 
             $away_team
             <span class='away_scorers'>$away_scorers </span>
             </div>
+            
+            <div id='vote-block-1'>
+            <h3> Who will win?</h3>
+            
+               <div style='max-width:100%;margin:0px auto;min-height:50px;padding:5px;border:0px solid black'>
+                
+                    <div class='btn btn-success' id='home-vote'>Home</div>
+                    <div class='btn btn-basic' id='draw-vote'>Draw</div>
+                    <div class='btn btn-primary' id='away-vote'>Away</div>
+                    
+                </div>
+                
+            </div>
+            
+            </div>
+            
             </div>                    
 
             <div class='match_facts'>

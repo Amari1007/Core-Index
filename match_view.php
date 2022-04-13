@@ -85,9 +85,49 @@ else{
             </div>
         </div>
         
+        <script>
+            $(document).ready(function(){
+                
+                $("#vote-block-1").click(function(){
+                    //deletes pre-vote bar
+                    $(this).remove();
+                    
+                    $.post(
+                        "include/get_votes.php",
+                        {
+                            match_ID:<?php echo $match_ID ?>,
+                            user_name:"<?php echo $_SESSION['user_name'] ?>",
+                            selected:1
+                        },
+                        function(data,status,obj){
+                            
+                            if(status=='success'){ 
+                                
+                                if( data=='Fatal error 1' || data=='Fatal error 2' || data=='Fatal error 3' ){
+                                   $(".teams").append("<div class='jumbotron'> <h2>Oops.... Could't get votes: "+data+"</h2> </div>");
+                                    
+                                   }else{
+                                       //display vote results bar in '.teams' if OK
+                                       $(".teams").append(data);
+                                   }
+                
+                               }else{
+                                   $(".teams").append("<div class='jumbotron'> <h2>Oops.... Could't get votes: Unspecified error</h2> </div>"); 
+
+                               }
+                        }
+                        
+                    );
+                
+            });
+                
+        });
+            
+        </script>
+        
         </main>
         
    <?php include_once("include/footer.php"); ?>
 
     </body>    
-</html>
+</html>+

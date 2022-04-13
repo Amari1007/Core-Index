@@ -4,6 +4,7 @@ require("coreDB.php");
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
     extract($_POST);    
+    extract($_SESSION);
 }
 
 else{
@@ -37,7 +38,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
             else if($status==='upcoming'){
                 $scores = "
                 <div id='scores'>
-                <a>
+                <a href='match_view.php?match_ID=$match_ID&code=$competition_code&league_name=$competition'>
                     <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>$time</div> 
                 </a>
                 <span style='text-align:center;display:block;color:black;font-size:13px'></span>
@@ -101,27 +102,23 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                                 <caption> <h4>Match ID:$match_ID</h4> </caption>
 
                                 <div class='form-group'>
-                                    <label for='#$venue'>Venue <span class='glyphicon glyphicon-home'></span> </label>
-                                    <input id='$venue' type='text' value='$venue' name='venue' style='color:black'>  
+                                    <label for='#venue'>Venue <span class='glyphicon glyphicon-home'></span> </label>
+                                    <input id='venue' type='text' value='$venue' name='venue' style='color:black' autocomplete='off'>  
                                 </div>
 
                                 <div class='form-group'>
-                                    <label for='#$referee'>Referee</label>
-                                    <input id='$referee' type='text' value='$referee' name='referee' style='color:black'>  
+                                    <label for='referee'>Referee</label>
+                                    <input id='referee' type='text' value='$referee' name='referee' style='color:black' autocomplete='off'>  
                                 </div>
 
                                 <div class='form-group'>
-                                    <label for='#$home_team'>Home Team</label>
-                                    <input type='text' value='$home_team' id='$home_team' name='home_team' style='color:black'> 
-                                    <label>Goals</label>
-                                    <input type='number' value='$home_goals' min='0' max='15' step='1' name='home_goals`' style='width:50px;color:black;'>  
+                                    <label for='#home_team'>Home Team</label>
+                                    <input type='text' value='$home_team' id='home_team' name='home_team' style='color:black' autocomplete='off' disabled >
                                 </div>
 
                                 <div class='form-group'>
-                                    <label for='#$away_team'>Away Team</label>
-                                    <input type='text' value='$away_team' id='$away_team' name='away_team' style='color:black'>
-                                    <label>Goals</label>
-                                    <input type='number' value='$away_goals' min='0' max='15' step='1' name='away_goals' style='width:50px;color:black;'>
+                                    <label for='#away_team'>Away Team</label>
+                                    <input type='text' value='$away_team' id='away_team' name='away_team' style='color:black' autocomplete='off' disabled>
                                 </div>
 
                                 <div class='form-group'> 
@@ -134,14 +131,37 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                         
                         <script> 
                             $('document').ready(function(){
-                                $('#event_form_$match_ID').submit(
-                                    function(){
-                                        var venue = $(this).form.venue.val();
-                                        alert(venue);
-                                        console.log(error);
+                                $('#event_form_$match_ID').submit(function(){
+                                    
+                                    var referee = $('#event_form_$match_ID #referee').val();
+                                    var venue = $('#event_form_$match_ID #venue').val();
+                                    var home_team = $('#event_form_$match_ID #home_team').val();
+                                    var away_team = $('#event_form_$match_ID #away_team').val();
+                                    
+                                    $.post(
+                                    'include/match_edit_verify.php',
+                                    {
+                                        match_ID:$match_ID,
+                                        user_id:'$user_id',
+                                        user_name:'$user_name',
+                                        user_type:'$user_type',
+                                        referee: referee,
+                                        venue: venue,
+                                        home_team: home_team,
+                                        away_team: away_team
+                                    },
+                                    function(data,status,obj){
+                                        if(status=='success'){
+                                            alert(data);
+                                        }else{
+                                            alert('Unspecified error');
+                                        }
+                                        
                                     }
                                     
-                                );
+                                    );
+                                    
+                                });
                                 
                             });
                             

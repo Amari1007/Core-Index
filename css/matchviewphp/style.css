@@ -2,7 +2,7 @@
     margin: auto;
     padding: 5px;
 /*    border: 1px solid black;*/
-    height: 80  0px;
+    min-height: 250px;
 }
 
 .match_info h5{
@@ -13,15 +13,10 @@
     border: 0px solid black;
     text-align: center;
     padding: 2px;
-    min-height:150px;
-/*
-    background: url('../../Media/italyfooter.jpg') no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-*/
-    
+    min-height:150px; 
 }
+
+/************ MATCH RESULT BOX **************/
 
 .home_team, .away_team{
 /*    border: 1px solid black;*/
@@ -116,6 +111,77 @@
 #match_stats, #line_ups:hover{
     cursor: pointer;
 }
+
+
+
+/**************** VOTE BOX ********************/
+
+/******** BEFORE VOTE CAST *********/
+#vote-block-1{
+    /* border: 1px solid black; */
+    padding: 5px;
+    margin-top: 50px;
+}
+
+#vote-block-1 div{
+    font-size: 18px;    
+    color:white;
+    font-weight: bold;
+}
+
+#vote-block-1 #home-vote{
+    width: 33%;
+    float: left;
+    background-color: #2b932b;
+}
+
+#vote-block-1 #draw-vote{
+    width: 33%;
+    float: none;
+    background-color: #9d9494c4;
+}
+
+#vote-block-1 #away-vote{
+    width: 33%;
+    float: right;
+    background-color: #337ab7;
+}
+
+/******* AFTER CAST **********/
+#vote-block-2{
+    /* border:1px solid black; */
+    margin-top:50px;
+    color:white;
+    padding:5px;
+}
+
+#vote-block-2 div{
+    font-size: 20px;
+}
+
+#vote-block-2 #home-vote{
+    width:34%; /*default width value*/
+    background-color:#2b932b;
+    display:inline-block;
+    float:left;
+    padding:0px;
+}
+
+#vote-block-2 #draw-vote{
+    width:33%; /*default width value*/
+    background-color: #9d9494c4;
+    display:inline-block;
+    float:none;
+}
+
+#vote-block-2 #away-vote{
+    width:33%; /*default width value*/
+    background-color: #337ab7;
+    display:inline-block;
+    float:right;
+}
+
+
 
 /****************MATCH STATS BOX GRAPHICS**************/
 
