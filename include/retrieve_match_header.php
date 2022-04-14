@@ -14,20 +14,29 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
             if($status == 'live'){
                 $scores = " 
                 
-                <div class='home_goals'>
-                    $home_goals
+                <div style='width:100%;text-align:center;font-weight:bold;color:white;padding:5px;'>
+                    
+                    <div id='home-goals' style='background-color:#2866f6;padding:2px'>
+                        $home_goals
+                    </div>
+
+                    <div id='away-goals' style='background-color:#2866f6;padding:2px'>
+                        $away_goals
+                    </div>
+                    
+                    <span style='text-align:center;display:block;color:#2866f6;font-size:13px'>
+                        &bull; live
+                    </span>
+                    
                 </div>
                 
-                <div class='away_goals'>
-                    $away_goals
-                </div>
                 
                 ";
             }
             elseif($status == 'upcoming'){
                 $scores = " 
                 
-                <div style='float:left;width:100%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>
+                <div style='width:100%;text-align:center;background-color:#b3b3b3c4;font-weight:bold;color:black;padding:5px;'>
                     $time
                 </div>
                 
@@ -35,11 +44,53 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
                 
             }
             elseif($status == 'report'){
+                $scores = " 
+                
+                <div style='width:100%;text-align:center;font-weight:bold;color:black;padding:5px;'>
+                    
+                    <div id='home-goals'>
+                        $home_goals
+                    </div>
+
+                    <div id='away-goals'>
+                        $away_goals
+                    </div>
+                    
+                </div>
+                
+                ";
+                
                 
             }
             elseif($status == 'played'){
+                $scores = " 
+                
+                <div style='width:100%;text-align:center;font-weight:bold;color:black;padding:5px;'>
+                    
+                    <div id='home-goals'>
+                        $home_goals
+                    </div>
+
+                    <div id='away-goals'>
+                        $away_goals
+                    </div>
+                    
+                </div>
+                
+                ";
                 
             }
+            else{
+                $scores = " 
+                
+                <div style='width:100%;text-align:center;background-color:#b3b3b3c4;font-weight:bold;color:black;padding:5px;'>
+                    Error:404
+                </div>
+                
+                ";
+                
+            }
+            
 
             echo"
             <div class='match_info'> 
@@ -47,19 +98,21 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
             <h5>$league_name &bull; $date</h5>
 
             <div class='teams'>
-
-            <div class='home_team'>
-            $home_team
-            <span class='home_scorers'>$home_scorers</span>
-            </div>
-
-            <div class='score'> 
-                $scores
-            </div>
-
-            <div class='away_team'> 
-            $away_team
-            <span class='away_scorers'>$away_scorers </span>
+            
+            <div id='teams-block'> 
+            
+                <div id='home-team-bar'>
+                    $home_team
+                </div>
+                
+                <div id='score-bar'>
+                    $scores  
+                </div>
+                
+                <div id='away-team-bar'>
+                    $away_team
+                </div>  
+                
             </div>
             
             <div id='vote-block-1'>
@@ -99,12 +152,12 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
         }
     }
     else{
-        echo "Error 2";
+        echo "<div class='jumbotron'> <h3 class='text text-danger'>An error occured while retrieving match information: 2<h3> </div>";
     }
 
 }
    else{
-    echo "<div class='jumbotron'> <h3 class='text text-danger'>An error occured while retrieving match information!<h3> </div>";
+    echo "<div class='jumbotron'> <h3 class='text text-danger'>An error occured while retrieving match information: 3<h3> </div>";
 }
         
 ?>

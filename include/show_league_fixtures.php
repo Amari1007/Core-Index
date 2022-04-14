@@ -26,7 +26,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
             if($status==='live'){
                 $scores = "
                 <div id='scores'>
-                <a href='match_view.php?match_ID=$match_ID&code=$competition_code&competition=$competition'>
+                <a href='match_view.php?match_ID=$match_ID&code=$competition_code&league_name=$competition'>
                     <div style='float:left;width:49%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$home_goals</div>
 
                     <div style='float:right;width:50%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$away_goals </div>
@@ -93,7 +93,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                         <div id='away_team' style='width:46%;float:right;text-align:left;overflow:hidden;'>$away_team 
                         
                         ".(
-                            isset($_SESSION['user_type'])&&isset($_SESSION['user_id'])?" <a data-toggle='collapse' data-target='#view_$match_ID'> &bull; Edit ?  </a>
+                            $_SESSION['user_type']=='admin'&&isset($_SESSION['user_id'])?" <a data-toggle='collapse' data-target='#view_$match_ID'> &bull; Edit ?  </a>
 
                         </div>
                     </li>                                                       
@@ -109,6 +109,16 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                                 <div class='form-group'>
                                     <label for='referee'>Referee</label>
                                     <input id='referee' type='text' value='$referee' name='referee' style='color:black' autocomplete='off'>  
+                                </div>
+
+                                <div class='form-group'>
+                                    <label for='#time'>Date</label>
+                                    <input id='date' type='date' value='$date' name='date' style='color:black' autocomplete='off' required>  
+                                </div>
+
+                                <div class='form-group'>
+                                    <label for='#time'>K.O. Time</label>
+                                    <input id='time' type='time' value='$time' name='time' style='color:black' autocomplete='off'>  
                                 </div>
 
                                 <div class='form-group'>
@@ -135,6 +145,8 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                                     
                                     var referee = $('#event_form_$match_ID #referee').val();
                                     var venue = $('#event_form_$match_ID #venue').val();
+                                    var time = $('#event_form_$match_ID #time').val();
+                                    var _date = $('#event_form_$match_ID #date').val();
                                     var home_team = $('#event_form_$match_ID #home_team').val();
                                     var away_team = $('#event_form_$match_ID #away_team').val();
                                     
@@ -147,6 +159,8 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                                         user_type:'$user_type',
                                         referee: referee,
                                         venue: venue,
+                                        time: time,
+                                        _date: _date,
                                         home_team: home_team,
                                         away_team: away_team
                                     },

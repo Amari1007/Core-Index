@@ -18,7 +18,7 @@ else{
     <head>
     <link rel="stylesheet" type="text/css" href="css/league_selectedphp/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/matchviewphp/style.css"/>
-     <script>
+    <script>
         $(document).ready(function(){
             //the code below will change the styling of the buttons in #teams
 
@@ -39,7 +39,7 @@ else{
 
     </script>
     
-     <script>
+    <script>
         $(document).ready(function(){
             $('#bars').load("include/match_facts_retrieve.php?match_ID=<?php echo $match_ID?>");
             
@@ -50,19 +50,6 @@ else{
             $('#line_ups').click(function(){
                 $('#bars').load("include/match_lineups_retrieve.php?match_ID=<?php echo $match_ID?>");
             })
-            
-            $(".team_voting img").click(function(){
-                var x = $(this).val();
-                $(".team_voting img").hide(500);
-                
-                $.post("include/getvotes.php" ,{match_ID:'<?php echo $match_ID ?>'}, function(data,status,ob){
-                    if(status=='success'){
-                        $(".team_voting").fadeIn(1000).html(data);
-                       }
-                       
-                });
-                
-            })
                
         });
      </script>
@@ -70,6 +57,7 @@ else{
 
     <body>
     
+        
     <?php require_once("include/header.php") ?>
         
     <?php require_once("include/league_navtab.php") ?>
