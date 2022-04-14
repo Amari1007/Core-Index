@@ -7,7 +7,7 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
             $date = strtotime($date);
             $date = date("d M, Y",$date); //converts date milliseconds to string date
             $time = strtotime($time); //converts to time value if original value is text
-            $time = date("H:i",$time); // converts to string Hour:Minute time format
+            $time = date("H:i A",$time); // converts to string Hour:Minute time format
             $scores = " ";
             
             //code below will display score or KO time
@@ -114,19 +114,23 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
                 </div>  
                 
             </div>
+            ".(
+                 //vote block below will only display if user is logged in
+                $status=="upcoming"&&isset($_SESSION['user_id'])&&isset($_SESSION['user_name'])? " 
+                <div id='vote-block-1'>
+                    <h3> Who will win?</h3>
             
-            <div id='vote-block-1'>
-            <h3> Who will win?</h3>
-            
-               <div style='max-width:100%;margin:0px auto;min-height:50px;padding:5px;border:0px solid black'>
+                   <div style='max-width:100%;margin:0px auto;min-height:50px;padding:5px;border:0px solid black'>
                 
                     <div class='btn btn-success' id='home-vote'>Home</div>
                     <div class='btn btn-basic' id='draw-vote'>Draw</div>
                     <div class='btn btn-primary' id='away-vote'>Away</div>
-                    
-                </div>
+                        
+                   </div>
                 
-            </div>
+                </div>":" "
+                
+            )."
             
             </div>
             

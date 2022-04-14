@@ -118,7 +118,7 @@
 #vote-block-1{
     /* border: 1px solid black; */
     padding: 5px;
-    margin-top: 50px;
+    margin-top:0px;
 }
 
 #vote-block-1 div{
@@ -146,9 +146,14 @@
 }
 
 /******* AFTER CAST **********/
+
+#vote-markers p{
+    display: inline-block;
+}
+
 #vote-block-2{
     /* border:1px solid black; */
-    margin-top:50px;
+    margin-top:0px;
     color:white;
     padding:5px;
 }
@@ -163,6 +168,8 @@
     display:inline-block;
     float:left;
     padding:0px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 #vote-block-2 #draw-vote{
@@ -177,6 +184,8 @@
     background-color: #337ab7;
     display:inline-block;
     float:right;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 

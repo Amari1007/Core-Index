@@ -15,6 +15,12 @@ if(isset($_POST['match_ID']) && isset($_POST['user_name']) && isset($_POST['sele
         $away_perc = floor( ($away_votes/$total_votes) * 100 );        
         
         echo("        
+        <div id='vote-markers'>
+            <p>Home win <span class='btn btn-success'><span> </p>
+            <p>Draw <span class='btn' style='background-color:#9d9494c4'><span> </p>
+            <p>Away win <span class='btn btn-primary'><span> </p>
+        </div>
+        
         <div id='vote-block-2'>         
             <div id='home-vote' style='width:$home_perc%'> $home_perc% </div>
             <div id='draw-vote' style='width:$draw_perc%'> $draw_perc% </div>
