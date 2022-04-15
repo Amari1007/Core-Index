@@ -1,4 +1,4 @@
-<?php   
+<?php  
 if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT 1")){
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
@@ -8,7 +8,7 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
             $date = date("d M, Y",$date); //converts date milliseconds to string date
             $time = strtotime($time); //converts to time value if original value is text
             $time = date("H:i A",$time); // converts to string Hour:Minute time format
-            $scores = " ";
+            $scores = " ";            
             
             //code below will display score or KO time
             if($status == 'live'){
@@ -90,7 +90,6 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
                 ";
                 
             }
-            
 
             echo"
             <div class='match_info'> 
@@ -113,45 +112,12 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
                     $away_team
                 </div>  
                 
-            </div>
-            ".(
-                 //vote block below will only display if user is logged in
-                $status=="upcoming"&&isset($_SESSION['user_id'])&&isset($_SESSION['user_name'])? " 
-                <div id='vote-block-1'>
-                    <h3> Who will win?</h3>
+            </div> <!-- #teams-block -->
             
-                   <div style='max-width:100%;margin:0px auto;min-height:50px;padding:5px;border:0px solid black'>
-                
-                    <div class='btn btn-success' id='home-vote'>Home</div>
-                    <div class='btn btn-basic' id='draw-vote'>Draw</div>
-                    <div class='btn btn-primary' id='away-vote'>Away</div>
-                        
-                   </div>
-                
-                </div>":" "
-                
-            )."
+            </div> <!-- .teams -->
             
-            </div>
+            </div>  <!-- .match_info -->  
             
-            </div>                    
-
-            <div class='match_facts'>
-
-            <div id='match_facts_headers'>                    
-            <div style='border-right:1px solid lightgrey;' id='match_stats' title='See team stats'>
-                Match Stats                
-            </div>
-
-            <div id='line_ups' title='See team match day squads'>
-                Line-Ups
-            </div>                    
-            </div> <!--#match_facts_headers-->
-
-            </div> <!--.match_facts-->  
-
-            </div> <!--.match_info-->
-
             ";
         }
     }

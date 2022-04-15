@@ -18,6 +18,7 @@ else{
     <head>
     <link rel="stylesheet" type="text/css" href="css/league_selectedphp/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/matchviewphp/style.css"/>
+    
     <script>
         $(document).ready(function(){
             //the code below will change the styling of the buttons in #teams
@@ -55,8 +56,7 @@ else{
      </script>
     </head>
 
-    <body>
-    
+    <body>    
         
     <?php require_once("include/header.php") ?>
         
@@ -67,55 +67,48 @@ else{
             require("include/retrieve_match_header.php");
         ?>   
         
-        <div id="bars"> 
-            <div class="jumbotron">
-            <h3>Nothing to see here yet...</h3>
-            </div>
+        <div class="container" id="vote-block">
+            <?php 
+                require("include/check_vote_history.php");
+            ?>   
         </div>
         
-        <script>
+        <script> 
             $(document).ready(function(){
-                
-                $("#vote-block-1").click(function(){
-                    //deletes pre-vote bar
-                    $(this).remove();
-                    
-                    $.post(
-                        "include/get_votes.php",
-                        {
-                            match_ID:<?php echo $match_ID ?>,
-                            user_name:"<?php echo $_SESSION['user_name'] ?>",
-                            selected:1
-                        },
-                        function(data,status,obj){
-                            
-                            if(status=='success'){ 
-                                
-                                if( data=='Fatal error 1' || data=='Fatal error 2' || data=='Fatal error 3' ){
-                                   $(".teams").append("<div class='jumbotron'> <h2>Oops.... Could't get votes: "+data+"</h2> </div>");
-                                    
-                                   }else{
-                                       //display vote results bar in '.teams' if OK
-                                       $(".teams").append(data);
-                                   }
-                
-                               }else{
-                                   $(".teams").append("<div class='jumbotron'> <h2>Oops.... Could't get votes: Unspecified error</h2> </div>"); 
-
-                               }
-                        }
-                        
-                    );
+               $("div #vote-block-1 ").click(function(){                   
+                   $.post(
+                       "include/get_votes.php",
+                       {
+                           match_ID: <?php echo $match_ID;  ?>,
+                           user_id: <?php echo $_SESSION['user_id']; ?>,
+                           user_name: " <?php echo $_SESSION['user_name']; ?> "
+                       },
+                       function(data,status,obj){
+                           if(status=='success'){
+                              $("#vote-block").html(data);
+                                  
+                           }else{
+                              $("#vote-block").html("<h3>An error occured</h3>");
+                              
+                           }
+                       
+                       }
+                       
+                   );
+                   
+               });
                 
             });
-                
-        });
-            
+        
         </script>
         
-        </main>
+        <?php 
+            require("include/retrieve_match_info_box.php");
+        ?> 
+        
+    </main>
         
    <?php include_once("include/footer.php"); ?>
 
     </body>    
-</html>+
+</html>
