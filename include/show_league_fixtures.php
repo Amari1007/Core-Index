@@ -26,7 +26,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
             if($status==='live'){
                 $scores = "
                 <div id='scores'>
-                <a href='match_view.php?match_ID=$match_ID&code=$competition_code&league_name=$competition'>
+                <a>
                     <div style='float:left;width:49%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$home_goals</div>
 
                     <div style='float:right;width:50%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$away_goals </div>
@@ -48,7 +48,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
             else if($status=='played'){ 
                 $scores = "                
                 <div id='scores'>
-                <a>
+                <a href='match_view.php?match_ID=$match_ID&code=$competition_code&league_name=$competition'>
                     <div style='float:left;width:49%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$home_goals</div>
 
                     <div style='float:right;width:50%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$away_goals </div>

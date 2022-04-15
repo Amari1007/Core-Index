@@ -75,17 +75,46 @@ else{
         
         <script> 
             $(document).ready(function(){
-               $("div #vote-block-1 ").click(function(){                   
+               $("div #vote-block-1 .btn").click(function(){    
+                   
+                   //determine button clicked
+                   var vote_clicked = $(this).val();
+                   
+                   //default vote values
+                   var home_add = 0; 
+                   var draw_add = 0;
+                   var away_add = 0;                   
+                   
+                   //assign vote based on button clicked
+                   if(vote_clicked == "home"){
+                          alert("home "+draw_add);
+                          home_add = 1;
+                      }
+                   else if(vote_clicked == "draw"){
+                           alert("draw");
+                           draw_add = 1;
+                   }
+                   else if(vote_clicked == "away"){
+                           alert("away");
+                           away_add = 1;
+                   }
+                   
+                   //send vote to database
                    $.post(
                        "include/get_votes.php",
                        {
                            match_ID: <?php echo $match_ID;  ?>,
                            user_id: <?php echo $_SESSION['user_id']; ?>,
-                           user_name: " <?php echo $_SESSION['user_name']; ?> "
+                           user_name: " <?php echo $_SESSION['user_name']; ?> ",
+                           home_add: home_add,
+                           draw_add: draw_add,
+                           away_add: away_add
+                           
                        },
                        function(data,status,obj){
                            if(status=='success'){
                               $("#vote-block").html(data);
+                               location.reload();//reload page every time after vote
                                   
                            }else{
                               $("#vote-block").html("<h3>An error occured</h3>");

@@ -127,7 +127,7 @@
     text-align: center;
 }
 
-#vote-block-1 div{
+#vote-block-1 button{
     font-size: 18px;    
     color:white;
     border-radius: 7px;
@@ -159,6 +159,7 @@
 
 #vote-markers p{
     display: inline-block;
+    margin-right: 5px;
 }
 
 #vote-block-2{
