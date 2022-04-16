@@ -56,6 +56,10 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
                         $away_goals
                     </div>
                     
+                    <span style='text-align:center;display:block;color:black;font-size:13px;'>
+                        FT
+                    </span>
+                    
                 </div>
                 
                 ";
@@ -65,7 +69,7 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
             elseif($status == 'played'){
                 $scores = " 
                 
-                <div style='width:100%;text-align:center;font-weight:bold;color:black;padding:5px;'>
+                <div style='width:100%;text-align:center;font-weight:bold;color:black;padding:0px;'>
                     
                     <div id='home-goals'>
                         $home_goals
@@ -74,6 +78,10 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
                     <div id='away-goals'>
                         $away_goals
                     </div>
+                    
+                    <span style='text-align:center;display:block;color:black;font-size:13px;'>
+                        FT
+                    </span>
                     
                 </div>
                 

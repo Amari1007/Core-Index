@@ -14,7 +14,7 @@ if( isset($user_id) && isset($user_name) ){
                 $decoded_data_v = json_decode($vote_rows['user_votes']);                
                 
                 //code below gets around null value error by assigning a blank array
-                $decoded_data_v = isset($decoded_data_v)?$decoded_data_v:array(0,0);
+                $decoded_data_v = !empty($decoded_data_v)?$decoded_data_v:array(0);
                 
                 //check if match_id is in previous vote data
                 if(array_search($match_ID,$decoded_data_v)){
@@ -56,10 +56,24 @@ if( isset($user_id) && isset($user_name) ){
                                 ";
                                 
                             }else{
-
-                            $home_perc = floor( ($home_votes/$total_votes) * 100 );
+                                
+                            $home_perc = ceil( ($home_votes/$total_votes) * 100 );
                             $draw_perc = ceil( ($draw_votes/$total_votes) * 100 );
                             $away_perc = floor( ($away_votes/$total_votes) * 100 );        
+                                
+                            //below code helps solve total_votes over 100% problem
+                            if( ($home_perc+$draw_perc+$away_perc)>100 ){
+                                if(!empty($draw_perc)){
+                                    $draw_perc = $draw_perc-1;
+                                }
+                                else if(!empty($away_perc)){
+                                    $away_perc = $away_perc-1;
+                                }
+                                else if(!empty($home_perc)){
+                                    $home_perc = $home_perc-1;
+                                }
+                                
+                            }
 
                             echo("        
                             <div id='vote-markers'>

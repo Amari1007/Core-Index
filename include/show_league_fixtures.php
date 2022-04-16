@@ -2,6 +2,8 @@
 session_start();
 require("coreDB.php");
 
+$_SESSION['user_type'] = isset($_SESSION['user_type'])?$_SESSION['user_type']:" "; //default value to avoid errors
+
 if($_SERVER['REQUEST_METHOD']==='POST'){
     extract($_POST);    
     extract($_SESSION);

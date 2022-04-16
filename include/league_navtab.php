@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="league_selected.php?league_name=<?php echo $league_name ?>" style="font-weight:bold"> <?php echo $league_name ?> </a>
+            <a class="navbar-brand" href="league_selected.php?league_name=<?php echo $league_name ?>&code=<?php echo $code ?>" style="font-weight:bold"> <?php echo $league_name ?> </a>
         </div>
 
         <div class="collapse navbar-collapse" id="league_nav">

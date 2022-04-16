@@ -6,6 +6,10 @@ require_once("coreDB.php");
 
 if(isset($_POST['match_ID']) && isset($_POST['user_id']) && isset($_POST['user_name']) ){
     extract($_POST);
+    
+    $home_add = (int)$home_add;
+    $draw_add = (int)$draw_add;
+    $away_add = (int)$away_add;
    
     if($result = $conn->query("SELECT home_votes,away_votes,draw_votes, concat(home_votes+away_votes+draw_votes) AS total_votes FROM `fixtures` WHERE match_ID=$match_ID LIMIT 1")){
     if($result->num_rows > 0){
@@ -20,7 +24,7 @@ if(isset($_POST['match_ID']) && isset($_POST['user_id']) && isset($_POST['user_n
                     $decoded_data_v = json_decode($vote_rows['user_votes']);
                     
                     //code below gets around any null value error by assigning a blank array
-                    $decoded_data_v = isset($decoded_data_v)?$decoded_data_v:[];
+                    $decoded_data_v = !empty($decoded_data_v)?$decoded_data_v:array(0);
                     
                     // convert match_ID and vote variables to int for database
                     $match_ID = (int)$match_ID;

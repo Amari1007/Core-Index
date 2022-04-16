@@ -87,15 +87,12 @@ else{
                    
                    //assign vote based on button clicked
                    if(vote_clicked == "home"){
-                          alert("home "+draw_add);
                           home_add = 1;
                       }
                    else if(vote_clicked == "draw"){
-                           alert("draw");
                            draw_add = 1;
                    }
                    else if(vote_clicked == "away"){
-                           alert("away");
                            away_add = 1;
                    }
                    
