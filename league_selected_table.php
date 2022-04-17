@@ -21,7 +21,9 @@ else{
     <head>
         <style>
             #league_table table th, #league_table table td{
-                text-align: left;            }
+                text-align: left;           
+            }
+            
         </style>
     
     </head>
