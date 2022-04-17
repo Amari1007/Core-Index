@@ -17,7 +17,7 @@
                 
                 <?php if( isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'admin' && isset($_SESSION['user_name']) ): ?>
                 
-                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/community.php"?"active":" " ?> "> <a href="community.php">Community</a></li>
+                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/community.php"?"active":" " ?> "> <a href="community.php">Developers</a></li>
                 
                 <?php endif ?>
                 
