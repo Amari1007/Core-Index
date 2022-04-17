@@ -10,7 +10,15 @@ extract($player_data);
 /*****************************************************************************************/
 
 $error= ''; //variable holding output text for use later
+$playerid = (int)$playerid; //prevent problems further in the script
 
+//code below gets player rating
+if($r = $conn->query("SELECT rating FROM `player_points` WHERE player_ID=$playerid LIMIT 1")){
+    $rating = $r->fetch_row();
+    $rating = !empty($rating[0])?"$rating[0]/10":"N/A"; //prevent null errors
+}else{
+    $rating = "N/A";
+}
 
 /******RETRIEVE DATA FROM PLAYER TABLE*********/
 if($result = $conn->query("SELECT * FROM players WHERE player_id=$playerid LIMIT 1")){
@@ -38,13 +46,9 @@ if($result = $conn->query("SELECT * FROM players WHERE player_id=$playerid LIMIT
             <td>Nationality</td>
             <td>$nationality</td>		
         </tr>
-         <tr>
-            <td style='font-weight:bold'>Score</td>
-            <td></td>		
-        </tr>
-         <tr style='font-weight:bold'>
+         <tr style='font-weight:bold;'>
             <td>Rating</td>
-            <td></td>		
+            <td style='color:white;font-weight:bold;background-color:#333333'>$rating</td>		
         </tr>
 
   </table> 
