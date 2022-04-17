@@ -76,13 +76,15 @@ else{
             <figure style='border:0px solid black'> 
             
             <?php
-                if($get_pic = $conn->query("SELECT league_id,logo FROM leagues where code='$code' ")){
+                if($get_pic = $conn->query("SELECT league_id,logo FROM competitions_tournaments where code='$code' ")){
                     if($get_pic->num_rows>0){
                         while($league_pic = $get_pic->fetch_assoc()){
                             extract($league_pic);
                             echo "<img src='$logo' width='170' alt='$league_name.jpg'>";
                         }
                     }
+                }else{
+                    echo "<div class='jumbotron'> No Data available 1</div>";
                 }            
             ?>
                 
@@ -95,7 +97,7 @@ else{
                 <ul>
                 <?php 
                 
-                if($get_clubs = $conn->query("SELECT club_ID,club_pic,club_name FROM `$code-teams` order by club_name asc ")){
+                if($get_clubs = $conn->query("SELECT club_ID,club_pic,club_name FROM `clubs` WHERE `league_code`='$code' order by club_name asc ")){
                     if($get_clubs->num_rows>0){
                         
                         //code below sets table structure
@@ -135,61 +137,63 @@ else{
         <div class="row">
             
             <!-- code below shows the latest news content from the league -->
+            <!-- THESE WILL BE UPDATED PERIODICALLY -->
             <div class="col-sm-7">
                 <section class="league_news">
-                     <?php 
-
-                    if($getNews=$conn->query(" SELECT * FROM `$code-news` WHERE 1 limit 7 ")){               
-                        if($getNews->num_rows>0){
-                            
-                            while($row_getNews=$getNews->fetch_assoc()){
-                                extract($row_getNews);
-                                
-                               echo $external!='yes' ? "
-                                <article>                                
-                                <header>
-                                <a href='news/2000.php?article_id=$news_article_id&code=$code&league_name=$league_name' >
-                                <h3>$news_article_header</h3>
-                                <img src='$images' width='350' onerror='article_imgerror(this)' alt='image na'>
-                                </a>
-                                </header>
-                                
-                                <aside> <span class='glyphicon glyphicon-tag'></span>$tags</aside>
-                                </article>
-                                ":" " ;
-                               
-                          }
-                            
-                        }else{
-                            echo "<div class='jumbotron'> <h3>No News Available 2</h3> </div>";
-                        }
-                    
-                    }else{
-                        echo "<div class='jumbotron'> <h3>No News Available 3</h3> </div>";
-                    }
-
-                    ?>
                     
                     <article>
                         <header>
-                            <a href='news/2000.php?article_id=$news_article_id&code=$code&league_name=$league_name' >
-                    
-                                <h3>Headline</h3>
-                                <img src='' width='350' onerror='article_imgerror(this)' alt='image na'>
+                            <a href="news/marian-marinica-casts-net-wider-on-backroom-staff.php?code=<?php echo $code; ?>&league_name=<?php echo $league_name; ?> ">                    
+                                <h3>Marian Marinica Casts Net Wider On Backroom Staff</h3>
+                                <img src='Media/News/mario-marinica.jpg' width='100%' onerror='article_imgerror(this)' alt='image na'>
                             </a>
                         </header>
 
-                        <aside> <span class='glyphicon glyphicon-tag'></span>News Tag</aside>
+                        <aside> <span class='glyphicon glyphicon-tag'></span>Times Sports</aside>
+                    </article>
+                    
+                    <article>
+                        <header>
+                            <a href="news/4-arrested-for-gate-fraud.php?code=<?php echo $code; ?>&league_name=<?php echo $league_name; ?> ">                    
+                                <h3>4 Arrested For Gate Fraud As ‘Blues’ March On</h3>
+                                <img src='Media/News/wanderers-sable-farming-nyangulu-780x405.jpg' width='100%' onerror='article_imgerror(this)' alt='image na'>
+                            </a>
+                        </header>
+
+                        <aside> <span class='glyphicon glyphicon-tag'></span>Times Sports</aside>
                     </article>
                     
                     <section class="external_content">
                         <h3 style="background-color:black;color:white;width:98%;padding:15px;border-radius:5px">External Links</h3>
+                    
+                    <article title="Open New Tab">
+                        <header>
+                            <a href="https://www.mbc.mw/news/sports/item/10679-bullets-drop-8-veteran" target="_blank">                   
+                                <h3>Bullets Drop 8 Veterans</h3>
+                                <img src='' onerror='article_imgerror(this)' width="100%" alt='image na'>
+                            </a>
+                        </header>
+
+                        <aside> <span class='glyphicon glyphicon-tag'></span>MBC Sports</aside>
+                    </article>
+                    
+                    <article title="Open New Tab">
+                        <header>
+                            <a href="https://times.mw/big-bullets-cruise-to-the-top/" target="_blank">                   
+                                <h3>Big Bullets Cruise To The Top</h3>
+                                <img src='Media/News/big-bullets-631x405.jpg' onerror='article_imgerror(this)' width="100%" alt='image na'>
+                            </a>
+                        </header>
+
+                        <aside> <span class='glyphicon glyphicon-tag'></span>Times Sports</aside>
+                    </article>
                     
                     </section>
                     
                 </section>            
             </div>
             
+            <!-- league table,  fixtures, top scorers -->
             <div class="col-sm-5" style="border:0px solid black">
                  <section class="league_content"> 
                      
@@ -200,7 +204,7 @@ else{
         <div class="table-responsive">
         <?php 
 
-        if($result = $conn->query("select *, CONCAT(win*3 + draw*1) AS points, CONCAT(win+draw+loss) AS played, CONCAT(gf-ga) AS gd from `$code-table_21-22` ORDER BY points DESC,gd DESC LIMIT 8")){
+        if($result = $conn->query("select *,CONCAT(win*3 + draw*1) AS points, CONCAT(gf-ga) as gd,CONCAT(win+draw+loss) AS played from `mw-tsl-table_22-23` ORDER BY points*1 DESC,gd*1 DESC,gf*1 DESC LIMIT 8")){
         if($result->num_rows > 0){
         echo "<table class='table table-hover table-responsive' style='width:100%; margin:auto'>
               <thead>
@@ -264,7 +268,7 @@ else{
                 
             @$conn = new mysqli("localhost","Admin","123abc","core");
  
-            if($result=$conn->query("SELECT * FROM `fixtures` WHERE date like '2021-10%' limit 5 ")){
+            if($result=$conn->query("SELECT * FROM `fixtures` where status!='upcoming' ORDER BY DATE desc limit 5 ")){
             if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
             extract($row);                
@@ -319,6 +323,18 @@ else{
                 <span style='text-align:center;display:block;color:black;font-size:12px'>FT</span>
                 </div> 
                 ";
+            }
+            else if($status=='disabled'){
+                $scores = "                
+                <div id='scores'>
+                <a>
+                    <div style='float:left;width:49%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$home_goals</div>
+
+                    <div style='float:right;width:50%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$away_goals </div>
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:12px'>FT</span>
+                </div>    
+                ";                
             }
             else{
                 $scores = "                

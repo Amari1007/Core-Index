@@ -71,6 +71,18 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                 </div> 
                 ";
             }
+            else if($status=='disabled'){
+                $scores = "                
+                <div id='scores'>
+                <a>
+                    <div style='float:left;width:49%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$home_goals</div>
+
+                    <div style='float:right;width:50%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$away_goals </div>
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:12px'>FT</span>
+                </div>    
+                ";                
+            }
             else{
                 $scores = "                
                 <div id='scores'>

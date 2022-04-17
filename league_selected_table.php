@@ -34,12 +34,13 @@ else{
         
     
     <main class="container">
+        <h2>League Table 2022 <span style="font-size:14px">&bull; Last updated on 4-17-2022 &bull;</span></h2>
         
         <div id="league_table" class="table-responsive">
             
         <?php 
     
-        if($result = $conn->query("select *, CONCAT(gf-ga) as gd, CONCAT(win*3 + draw*1) AS points,CONCAT(win+draw+loss) AS played from `mw-tsl-table_21-22`  ORDER BY points DESC,gd DESC ")){ 
+        if($result = $conn->query(" select *,CONCAT(win*3 + draw*1) AS points, CONCAT(gf-ga) as gd,CONCAT(win+draw+loss) AS played from `mw-tsl-table_22-23` ORDER BY points*1 DESC,gd*1 DESC,gf*1 DESC ")){ 
             if($result->num_rows > 0){
                 echo "<table class='table table-striped'>
                       <thead>
@@ -61,7 +62,7 @@ else{
                     while($row = $result->fetch_assoc()){
                     extract($row);
                     
-                    //code below  checks if club is in database and creates a link if true
+                    //code below  checks if club is in clubs table and creates a link if true
                     if($clubdata = $conn->query("SELECT club_ID,club_name,club_pic FROM clubs WHERE club_name LIKE '%$club%' LIMIT 1 ")){
                         if($clubdata->num_rows>0){
                             while($rowclubdata = $clubdata->fetch_assoc()){
@@ -83,7 +84,7 @@ else{
                         
                     $gd = $gf-$ga;    
                     echo "
-                     <tr> <td>$pos</td> <td>$club</td> <td> <img src='$club_pic' class='img-circle' width='45' onerror='team_imgerror(this)' alt='N/a'> </td> <td>$played</td> <td>$win</td> <td>$draw</td> <td>$loss</td> <td>$gd</td> <td>$points</td>
+                     <tr> <td style='font-weight:bold;font-size:16px;'>$pos</td> <td>$club</td> <td> <img src='$club_pic' class='img-circle' width='45' onerror='team_imgerror(this)' alt='N/a'> </td> <td>$played</td> <td>$win</td> <td>$draw</td> <td>$loss</td> <td>$gd</td> <td>$points</td>
                      </tr>      
                          ";    
                     $pos+=1;

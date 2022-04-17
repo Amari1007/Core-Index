@@ -57,7 +57,7 @@ if($result = $conn->query("SELECT * FROM `leagues` WHERE 1 ")){
             
             </div>
             
-            <div class="col-sm-6">
+            <!--<div class="col-sm-6">
                 <h3>Cup Competitions</h3>
                 <p>                    
                     <a href="#">
@@ -65,7 +65,7 @@ if($result = $conn->query("SELECT * FROM `leagues` WHERE 1 ")){
                         Airtel Top 8
                     </a>                    
                 </p>            
-            </div>
+            </div>-->
             
         </div>
         

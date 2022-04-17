@@ -91,7 +91,7 @@ main{
 
 .league_news article a{
     text-decoration: none;
-    color: #123467;
+    color: black;
 }
 
 .league_news article header{
@@ -112,6 +112,7 @@ main{
     margin-bottom: 10px;
     padding: 5px;
     min-height: 150px;
+    color: black;
 /*    background-image: url(../../Media/spursfooter.jpg);*/
 /*    background-image: -webkit-linear-gradient(#336666,#66cccc);*/
     background-position: center;
