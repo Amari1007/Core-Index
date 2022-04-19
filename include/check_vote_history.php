@@ -59,7 +59,8 @@ if( isset($user_id) && isset($user_name) ){
                                 
                             $home_perc = ceil( ($home_votes/$total_votes) * 100 );
                             $draw_perc = ceil( ($draw_votes/$total_votes) * 100 );
-                            $away_perc = floor( ($away_votes/$total_votes) * 100 );        
+                            $away_perc = floor( ($away_votes/$total_votes) * 100 );   
+                                
                                 
                             //below code helps solve total_votes over 100% problem
                             if( ($home_perc+$draw_perc+$away_perc)>100 ){
@@ -74,10 +75,11 @@ if( isset($user_id) && isset($user_name) ){
                                 }
                                 
                             }
+                                    
 
                             echo("        
                             <div id='vote-markers'>
-                                <h3> Who will win </h3>
+                                <h3> Who will win? </h3>
                                 
                                 <p>
                                     <span class='btn btn-success'></span> &bull;
@@ -97,9 +99,9 @@ if( isset($user_id) && isset($user_name) ){
                             </div>
 
                             <div id='vote-block-2'>         
-                                <div id='home-vote' style='width:$home_perc%'> $home_perc% </div>
-                                <div id='draw-vote' style='width:$draw_perc%'> $draw_perc% </div>
-                                <div id='away-vote' style='width:$away_perc%'> $away_perc% </div>
+                                <div id='home-vote' style='width:$home_perc%'>".(!empty($home_perc)?"$home_perc%":" ")."</div>
+                                <div id='draw-vote' style='width:$draw_perc%'>".( (!empty($draw_perc)?"$draw_perc%":" ") )."</div>
+                                <div id='away-vote' style='width:$away_perc%'>".( (!empty($away_perc)?"$away_perc%":" ") )."</div>
                             </div>        
                             ");
                                 
