@@ -1,0 +1,15 @@
+body{
+    width: 100%;
+}
+
+#sidebar{
+    border-right: 1px solid lightgrey;
+    width: 20%;
+    float: left;
+}
+
+#content{
+/*    border-left:1px solid black;*/
+    width: 75%;
+    float: right;
+}

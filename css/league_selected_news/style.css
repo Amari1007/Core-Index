@@ -8,6 +8,12 @@ body{
     float: left;
 }
 
+#content{
+    border-left:1px solid lightgrey;
+    width: 80%;
+    float: right;
+}
+
 #content #news-header-bar{
     margin-left:20px;
     width:200px;
@@ -23,11 +29,6 @@ body{
     font-weight: bold;
 }
 
-#content{
-    border-left:1px solid lightgrey;
-    width: 80%;
-    float: right;
-}
 
 #content section{
     font-family: Segoe UI;

@@ -34,7 +34,6 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
 
     <main class="container">
         <div class="row">
-            <img src="https://www.gstatic.com/onebox/sports/logos/inverse-crest.svg" width="50px" style="background-color:grey">
 
             <div class="col-sm-4" title="Add or Edit Any Upcoming Match Event">
                 <a href="edit_Event.php">
