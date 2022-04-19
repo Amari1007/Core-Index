@@ -32,10 +32,11 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
     <body>
     <?php require_once("include/header.php") ?>
 
-    <main class="container-fluid">
+    <main class="container">
         <div class="row">
+            <img src="https://www.gstatic.com/onebox/sports/logos/inverse-crest.svg" width="50px" style="background-color:grey">
 
-            <div class="col-sm-3" title="Add or Edit Any Upcoming Match Event">
+            <div class="col-sm-4" title="Add or Edit Any Upcoming Match Event">
                 <a href="edit_Event.php">
                     <div class="jumbotron">
                         <h2>Edit Event</h2>                        
@@ -44,7 +45,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
                 </a>
             </div>
             
-            <div class="col-sm-3" title="Add a Player To The Database">
+            <div class="col-sm-4" title="Add a Player To The Database">
                 <a href="addplayer.php">
                     <div class="jumbotron">
                         <h2>Add Player</h2>
@@ -54,7 +55,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
                 </a>
             </div>
 
-            <div class="col-sm-3" title="Edit a Player In The Database">
+            <div class="col-sm-4" title="Edit a Player In The Database">
                 <a href="editplayer.php">
                     <div class="jumbotron">
                         <h2>Edit Player</h2>
@@ -64,6 +65,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
                 </a>
             </div>
 
+            <!-- UNCOMMENT AFTER PRESENTATION
             <div class="col-sm-3" title="Choose Another Option">
                 <a href="#">
                     <div class="jumbotron">
@@ -72,7 +74,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
                         <span class="glyphicon glyphicon-cog"></span>
                     </div>
                 </a>
-            </div>
+            </div> -->
         
         </div>
     </main>

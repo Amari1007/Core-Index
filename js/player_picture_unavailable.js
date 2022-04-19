@@ -1,3 +1,3 @@
  function player_imgerror(x){
-     x.src = "icons_pack\\person-outline.svg";
+     x.src = "Media\\Icons\\player_image.png";
  }

@@ -77,10 +77,10 @@ if($result = $conn->query("SELECT * FROM players WHERE player_id=$playerid LIMIT
             ";
         }
     }else{
-        $player_info = "No record in database";
+        $player_info = "<div class='jumbotron'>Oops.... We ran into some trouble*</div>";
     }
 }else{
-    $error = "Database server couldnt execute query";
+    $player_info = "<div class='jumbotron'>Oops.... We ran into some trouble**</div>";
 }
 /**********************************************/
 
@@ -110,8 +110,13 @@ if($result = $conn->query("SELECT * FROM clubs WHERE club_name LIKE '%$club_name
             </table>
             ";        
         }
-        }
+        }else{
+            $club_info = null;
     }
+    
+    }else{
+    $club_info = null;
+}
 
 /***********RETRIEVE DATA FOR NATIONAL TEAM***************/
 
@@ -140,8 +145,13 @@ if($result = $conn->query("SELECT * FROM national_team WHERE nation_name = '$nat
             </table>  
             ";
             }
-        }
+        }else{
+            $nation_info = null;
     }
+    
+    }else{
+        $nation_info = null;
+}
 
 
 /**********RETRIEVE DATA FOR FIXTURES************/

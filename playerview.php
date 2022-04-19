@@ -62,7 +62,7 @@ $player_data = json_decode($raw,true);
                     @$conn = new mysqli("localhost","Admin","123abc","core");
                     
                     //output players from player table matching club name
-                    if($result = $conn->query("SELECT * FROM players WHERE club='$club_name' ")){
+                    if($result = $conn->query("SELECT * FROM players WHERE club='$club_name' and player_ID!=$playerid ")){
                         if($result->num_rows > 0){
                             while($row = $result->fetch_assoc()){
                                 extract($row);;
@@ -80,21 +80,47 @@ $player_data = json_decode($raw,true);
                                 }else{
                                         $nationalpic = '';
                                      }
+                                
 
                                 echo ("
+                                           
+                                <script>            
+                                    $('document').ready(function(){
+                                        $('.player_id_$player_ID').click(function(){
+                                            var player_id_$player_ID = {playerid:$player_ID, fname:'$fname', lname:'$lname', club_name:'$club', nationality:'$nationality'} 
+                                            var x = JSON.stringify(player_id_$player_ID);
+
+                                            $.post(
+                                                'include/player_data.php',
+                                                {
+                                                    data:x
+                                                },
+                                                function(data,status){
+                                                    if(status=='success'){
+                                                        window.open(data, '_parent');
+                                                    }else{
+                                                        window.open(' ".( htmlspecialchars($_SERVER['PHP_SELF']) )." ', '_parent');
+                                                    }                            
+                                                }
+                                            );
+
+                                        });
+                                    });
+                                </script>
                                 <tr>
                                 <td> 
-                                <a href='playerview.php?playerid=$player_ID&club_name=$club&nationality=$nationality'>$fname $lname</a>
+                                <a class='player_id_$player_ID' style='cursor:pointer' title='Get to know $fname $lname'>$fname $lname</a>
                                 </td> 
                                 <td> 
-                                <img class='img-rounded' src='$player_pic' alt='$fname $lname.jpg' onerror='player_imgerror(this)' width='50'> 
-                                <img id='nation_pic' src='$nationalpic' alt='N/A' width='30'>
+                                <img class='img-rounded' src='$player_pic' width='50' onerror='player_imgerror(this)' alt='$fname $lname.jpg'> 
+                                <img id='nation_pic' src='$nationalpic' width='30' onerror='team_imgerror(this)' alt='N/A'>
                                 </td>
                                 <td> <span class='$position'> $position </span> </td> 
                                 <td>$age</td>                                    
                                 <td>N/A</td>                                    
                                 </tr>
-                                ");
+                                ");                                
+                                
                             }
                         }else{
                             $error = "Error 2";

@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php" style="color:white;font-weight:bold">Core Index</a>
+            <a class="navbar-brand" href="../index.php" style="color:white;font-weight:bold">Core Index</a>
         </div>
         
         <div class="collapse navbar-collapse" id="example">

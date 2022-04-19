@@ -21,15 +21,44 @@ require_once("include/coreDB.php"); //import database connector
                 while($row = $result->fetch_assoc()){
                     extract($row);
                     
-                    $output = "
+                    $team_position = null;
+                    
+                    //query1 and query2 was supposed to be done together, but a weird error kept coming up
+                    if( $query1=$conn->query("SET @row_number = 0;") && $query2=$conn->query("select pos_ID,club,win,draw,loss,ga,gf,(@row_number:=@row_number + 1) AS row_num, CONCAT(win*3 + draw*1) AS points, CONCAT(gf-ga) as gd,CONCAT(win+draw+loss) AS p from `mw-tsl-table_22-23` ORDER BY points*1 DESC,gd*1 DESC,gf*1 DESC;") ){ 
+                        if($query2->num_rows > 0){
+                            while($get_row = $query2->fetch_assoc() ){                                
+                                
+                                //if name is found break loop and get position number
+                                if($get_row['club'] == $club_name){
+                                    $team_position = $get_row['row_num'];
+                                    break;
+                                }else{
+                                    $team_position = "N/A";
+                                }
+                                
+                            }
+                        }else{
+                            $team_position = "N/A";
+                        }
+                        
+                    }else{
+                       $team_position = "N/A";
+                    }
+                    
+                    
+                    $output = " 
                     
              <table class='table-hover'>
                  <tr>
-                    <td colspan='2' style='text-align:center'><img class='img-circle' width='120' src=".$row['club_pic']." alt='image N/A'></td>		
+                    <td colspan='2' style='text-align:center'><img class='img-circle' width='120' src='$club_pic' onerror='team_imgerror(this)' alt='image N/A'></td>		
                 </tr>
                 <tr>
                     <td>Club Name</td>
-                    <td> <a href='clubview.php?clubid=$clubid&club_name=$club_name'>".$row['club_name']."</a></td>		
+                    <td> <a href='clubview.php?clubid=$clubid&club_name=$club_name'>$club_name</a></td>		
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>$country</td>		
                 </tr>
                 <tr>
                     <td>Home Stadium</td>
@@ -37,27 +66,19 @@ require_once("include/coreDB.php"); //import database connector
                 </tr>
                 <tr>
                     <td>Manager</td>
-                    <td>".$row['manager']."</td>		
+                    <td>$manager</td>		
                 </tr>
                 <tr>
                     <td>Formation</td>
-                    <td>".$row['formation']."</td>		
+                    <td>$formation</td>		
                 </tr>
                 <tr>
                     <td>League</td>   
-                    <td>".$row['league']."</td>		
+                    <td>$league</td>		
                 </tr>  
                  <tr>
                     <td>League Position</td>   
-                    <td> <span class=p".$league_position.">".$league_position." </span> </td>		
-                </tr>  
-                 <tr>
-                    <td>Club Score</td>   
-                    <td> </td>
-                </tr>  
-                 <tr>
-                    <td>Overall Ranking</td>   
-                    <td> </td>		
+                    <td> <span class='p$team_position'>$team_position</span> </td>		
                 </tr>  
   
                 </table>

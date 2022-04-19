@@ -51,7 +51,9 @@
                     
                     <li><a href="include/log_out.php" title="Logout?">Logout</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Settings</a></li>
+                    
+                    <!-- Settings page later
+                     <li><a href="#">Settings</a></li> -->
                 </ul>
             </div>
             

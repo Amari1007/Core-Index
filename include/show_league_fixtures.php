@@ -70,6 +70,17 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                 <span style='text-align:center;display:block;color:black;font-size:12px'>FT</span>
                 </div> 
                 ";
+            }            
+            else if($status=='postponed'){                
+                $scores = "
+                <div id='scores'>
+                <a>
+                    <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>TBD</div> 
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:13px'>Postponed</span>
+                </div>
+                
+                ";
             }
             else if($status=='disabled'){
                 $scores = "                
