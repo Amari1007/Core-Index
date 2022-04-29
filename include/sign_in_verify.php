@@ -31,7 +31,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     
                         //session_unset(); //comment this later
                         $conn->close();
-                        header("location: ../leagues.php");
+                        header("location: ../league_selected.php?league_id=1&code=mw-tsl&league_name=TNM Super League");
                         exit();
                     }else{ 
                         //if password is wrong

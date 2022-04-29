@@ -5,8 +5,13 @@
     font-family: Segoe UI;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     overflow-x: hidden;
+/*    scroll-behavior: smooth;*/
 }
 
 main{

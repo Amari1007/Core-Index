@@ -32,7 +32,7 @@
 #teams-block #home-team-bar{
     float: left;
     width: 43%;
-    padding: 3px;
+    padding: 0px;
     text-align: right;
     font-size: 18px;
     font-weight: bold;
@@ -42,7 +42,7 @@
 #teams-block #away-team-bar{
     float: right;
     width: 43%;
-    padding: 3px;
+    padding: 0px;
     text-align: left;
     font-size: 18px;
     font-weight: bold;
@@ -51,8 +51,9 @@
 
 #teams-block #score-bar{
     float: none;
-    width: 14%;
+    width: 10%;
 /*    padding: 0px; */
+    padding-top: 10px;
 /*    border: 1px solid black;    */
 }
 
@@ -271,4 +272,37 @@
     float: right;
     width: 50%;
      min-height: 300px;
+}
+
+
+/*************** COMMENTS BOX ***************/
+#comments-box{
+/*    border: 1px solid black;*/
+    border-top: 3px solid #e8491d;
+    border-bottom: 3px solid #e8491d;
+    padding: 5px;
+}
+
+#comments-box .user-comment{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#comments-box .user-comment-name{
+    border: 1px solid black;
+    padding: 5px;
+    font-size:18px;
+    font-weight: bold;
+}
+
+#comments-box .user-comment-data{
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#comments-box .user-comment-time{
+    border: 1px solid black;
+    padding: 5px;
+    font-size: 13px;
+    color: #0A6CFF;
 }

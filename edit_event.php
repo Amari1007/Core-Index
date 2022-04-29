@@ -77,8 +77,15 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
     <main class="container-fluid">
         
         <div class="btn-group btn-group-justified" id="selectors" style="margin-bottom:10px">
-            <h3 class="btn btn-primary" style="font:bold 18px helvetica" onclick="show_edit_event(this)">Edit Existing Event </h3>
-            <h3 class="btn btn-defualt" style="font:bold 18px helvetica" onclick="show_add_event(this)">Add Event</h3>
+            
+            <h3 class="btn btn-primary" style="font:bold 18px helvetica" onclick="show_edit_event(this)">
+                Edit Existing Event
+            </h3>
+            
+            <h3 class="btn btn-default" style="font:bold 18px helvetica" onclick="show_add_event(this)">
+                Add Event
+            </h3>
+            
         </div> 
     
         <div id="edit_event">
@@ -110,6 +117,122 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
             
         </div>
         
+        <div id="add_event" class="container">
+            
+            <div style="border:0px solid black">
+                <h1>Add Event</h1>
+                
+                <form method="post" name="add_event_form" onsubmit="add_event(this)">
+                    <div>
+                        <label>Home team</label>
+                        <input type="text" name="home_team" maxlength="30" required placeholder="Home Team..." autocomplete="off">
+                    </div>
+                    
+                    <div>
+                        <label>Away team</label>
+                        <input type="text" name="away_team" maxlength="30" required placeholder="Away Team..." autocomplete="off">
+                    </div>
+                    
+                    <div>
+                        <label>Date</label>
+                        <input type="date" name="date" required>
+                    </div>
+                    
+                    <div>
+                        <label>Time</label>
+                        <input type="time" name="time" required>
+                    </div>
+                    
+                    
+                    <div>
+                        <label>Venue</label>
+                        <input type="text" name="venue" maxlength="30"  placeholder="Match Venue" required autocomplete="off">
+                    </div>
+                    
+                    
+                    <div>
+                        <label>Referee</label>
+                        <input type="text" name="referee" maxlength="30" required placeholder="Match Referee" autocomplete="off">
+                    </div>
+                    
+                    <div>
+                        <input type="reset" value="Reset" class="btn btn-danger" style="color:white;padding:10px;width:70px">
+                    </div>
+                    
+                    <div>
+                        <input type="submit" class="btn btn-success" style="color:white;padding:10px;width:70px">
+                    </div>
+                    
+                    <script>
+                        
+                        function add_event(x){
+                            
+                            var response = true;
+                            
+                            if( confirm("Submit this data") ){
+                                //if user confirms
+                                                            
+                            var home_team = x.home_team.value;
+                            var away_team = x.away_team.value;
+                            var date= x.date.value;
+                            var time = x.time.value;
+                            var referee = x.referee.value;
+                            var venue = x.venue.value;
+                                                        
+                            $(document).ready(function(){
+                                
+                                $.post(
+                                    "include/add_event.php",
+                                    {
+                                        user_id:<?php echo $_SESSION['user_id']; ?>,
+                                        user_type:"<?php echo $_SESSION['user_type']; ?>",
+                                        user_name:"<?php echo $_SESSION['user_name']; ?>",
+                                        home_team:home_team,
+                                        away_team:away_team,
+                                        date:date,
+                                        time:time,
+                                        referee:referee,
+                                        venue:venue
+                                    },
+                                    function(data,status){
+                                        
+                                        if(status=="success"){
+                                           if(data=="success"){
+                                              alert("Successfully added event: "+data);
+                                              }else{
+                                                  alert("Failed operation: "+data);
+                                              }
+                                           }
+                                        else{
+                                            alert("Fatal Error: "+data);
+                                            location.reload();    
+                                          }
+                                    }
+                                );
+                                
+                            })
+                                
+                                
+                            }else{
+                                response = false;
+                            }
+                            
+                            return response;
+                            
+                        }   
+                        
+                    </script>
+                    
+                </form>
+                
+            </div>
+        
+            <script>
+                
+            </script>
+            
+        </div>
+        
     </main>
         
     <!--code below alters edit and add buttons when clicked-->
@@ -117,15 +240,15 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
         function show_add_event(x){
             $("#selectors h3").removeClass().addClass("btn btn-default");
             $(x).removeClass().addClass("btn btn-primary");
-            $("#edit_event").hide(300);
-            $("#add_event").show(300);
+            $("#edit_event").hide(200);
+            $("#add_event").show(200);
         }
         
         function show_edit_event(x){
             $("#selectors h3").removeClass().addClass("btn btn-default");
             $(x).removeClass().addClass("btn btn-primary");
-            $("#add_event").hide(300);
-            $("#edit_event").show(300)            
+            $("#add_event").hide(200);
+            $("#edit_event").show(200)            
         }
         
     </script>

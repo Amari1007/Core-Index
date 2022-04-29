@@ -1,5 +1,24 @@
+/*edit event view*/
 #edit_event{
     border: 0px solid black;    
+}
+
+/*add event view*/
+#add_event{
+    border: 0px solid black;
+    padding: 10px;
+}
+
+#add_event form div{
+    border: 0px solid black;
+    padding: 10px;
+}
+
+#add_event form input{
+    padding: 5px;
+    color: black;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
 }
 
 #dates{

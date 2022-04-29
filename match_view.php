@@ -56,7 +56,7 @@ else{
      </script>
     </head>
 
-    <body>    
+    <body>
         
     <?php require_once("include/header.php") ?>
         
@@ -131,6 +131,53 @@ else{
         <?php 
             require("include/retrieve_match_info_box.php");
         ?> 
+        
+      <!--  <div id="comments-box">
+            <h2>Live Interactions</h2>
+            <?php 
+            
+                if($result = $conn->query(" SELECT * FROM `user_comments` ")){
+                    if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        extract($row);
+                
+                        $comment_date = date("d M, Y",strtotime($comment_date)); //converts date milliseconds to string date
+                        
+                        $comment_time = strtotime($comment_time); //converts to time value if original value is text
+                        $comment_time = date("H:i",$comment_time); // converts to string Hour:Minute time format
+                        
+                        echo("
+                            <div class='user-comment'>
+                                
+                                <div class='user-comment-name'> $user_name 
+                                <span class='glyphicon glyphicon-user'> </span>
+                                </div>
+                                
+                                <div class='user-comment-data'> $comment_data 
+                                </div>
+                                
+                                <div class='user-comment-time'>Commented on $comment_date at $comment_time 
+                                <span class='glyphicon glyphicon-time'> </span>
+                                </div>
+                                
+                            </div>
+                        ");
+                        
+                        }
+                    
+                    }else{
+                        echo "
+                        <div class='jumbotron'> <h3> Nothing to see here.... yet </h3> <button class='btn btn-danger'>Add Comment</button></div>
+                        
+                        ";
+                    }
+                    
+                }else{
+                    echo "<div class='jumbotron'> <h3>A Fatal Error Occured</h3> </div>";
+                }
+                
+            ?>
+        </div>-->
         
     </main>
         

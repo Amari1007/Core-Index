@@ -95,7 +95,7 @@ else{
                     
                     <figure>
                         <img src="../Media/News/mario-marinica.jpg" width="100%">
-                        <figcaption style="padding:10px;font-weight:bold">Wanderers vs Sable Farming </figcaption>                        
+                        <figcaption style="padding:10px;font-weight:bold">Marian Marinica </figcaption>                        
                     </figure>
                     
                     <section>

@@ -1,5 +1,8 @@
 <?php
 session_start();
+header("location:index.php"); //this will redirect to index page
+exit();//code below isnt supposed to run until further notice
+
 
 require_once("include/coreDB.php");
 

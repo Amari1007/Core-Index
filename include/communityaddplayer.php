@@ -18,32 +18,32 @@ if($result = $conn->query("SELECT * FROM players WHERE fname='$fname' AND lname=
 
 /**********************FOR PLAYER PICTURE*************************/
 if(isset($add_button)){
-    if(isset($pictype)){
+    if(isset( $_FILES['pic']['name']) ){
     $picname = $_FILES['pic']['name'];
     $pictmp = $_FILES['pic']['tmp_name'];
     $picsize = $_FILES['pic']['size'];
     $picerror = $_FILES['pic']['error'];
     $pictype = $_FILES['pic']['type'];
     
-    $picext = explode('.', $picname); //seperate file name by '.'
+    $picext = explode('.',$picname); //seperate file name by '.'
     $getext = strtolower(end($picext));
     
     $allowedext = array('jpg','jpeg','webp','png'); //allowed file extensions
-    $dbpicdestination = null;
+    $dbpicdestination = " ";
     if(in_array($getext, $allowedext) ){
         if($picerror === 0 ){
             if($picsize < 10000000){
                 //if picture size is less than 10000000 bytes = 10Mb
-                $picnameNew = $fname.lname.".".$getext;
-                $picdestination = "../Media/Players/".$picnameNew;
-                $dbpicdestination = "Media/Players/".$picnameNew;
+                $picnameNew = "$fname.$lname.$getext";
+                $picdestination = "../Media/Players/$picnameNew";
+                $dbpicdestination = "Media/Players/$picnameNew";
                 move_uploaded_file($pictmp,$picdestination);   
                 
                 $sql = "INSERT INTO players(fname,lname,position,age,nationality,club,player_pic) 
                 VALUES('$fname', '$lname', '$position', $age, '$nationality', '$club', '$dbpicdestination' ) ";
 
                 if($conn->query($sql)){
-                    header("Location:../addplayer.php?message=$fname $lname successfully added executed 1");
+                    header("Location:../addplayer.php?message=$fname $lname successfully added *");
                     $conn->close();
                     exit();
                 }  
@@ -65,17 +65,19 @@ if(isset($add_button)){
     } 
     }
     else{
-        $dbpicdestination = null;
+       
+    //$dbpicdestination = null;
+        
     //if picture isnt set 
-    
     $sql = "INSERT INTO players(fname,lname,position,age,nationality,club,player_pic) 
     VALUES('$fname', '$lname', '$position', $age, '$nationality', '$club', '$dbpicdestination' ) ";
 
     if($conn->query($sql)){
-        header("Location:../addplayer.php?message=$fname $lname was successfully added executed 2");
+        header("Location:../addplayer.php?message=$fname $lname was successfully added **");
         $conn->close();
         exit();
     }
+        
     }
     
 }

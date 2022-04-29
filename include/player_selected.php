@@ -15,7 +15,7 @@ $playerid = (int)$playerid; //prevent problems further in the script
 //code below gets player rating
 if($r = $conn->query("SELECT rating FROM `player_points` WHERE player_ID=$playerid LIMIT 1")){
     $rating = $r->fetch_row();
-    $rating = !empty($rating[0])?"$rating[0]/10":"N/A"; //prevent null errors
+    $rating = !empty($rating[0])?"$rating[0]/10":"6/10"; //prevent null errors
 }else{
     $rating = "N/A";
 }
@@ -159,7 +159,7 @@ if($result = $conn->query("SELECT * FROM national_team WHERE nation_name = '$nat
         if($result2->num_rows>0){
             while($clubdata = $result2->fetch_assoc()){
                 extract($clubdata);
-   if($result=$conn->query("SELECT * FROM `$league_code-fixtures` where home_team like'%$club_name%' or away_team like'%$club_name%' ORDER BY `date` DESC")){
+   if($result=$conn->query("SELECT * FROM `fixtures` where home_team like'%$club_name%' or away_team like'%$club_name%' ORDER BY `date` DESC LIMIT 5")){
     if($result->num_rows > 0){
         $fixture_list = null;
         $fixture_list = "<table class='table table-hover table-responsive' style='width:80%; border:0px solid black;margin:auto; margin-bottom:30px'>";
@@ -205,17 +205,17 @@ if($result = $conn->query("SELECT * FROM national_team WHERE nation_name = '$nat
         $fixture_list .= "</table>";
     } 
        else{
-    $fixture_list = "<div class='jumbotron'> <h3>Fixtures Currently Unavailable 1</h3> </div>";
+    $fixture_list = "<div class='jumbotron'> <h3>Fixtures Currently Unavailable *</h3> </div>";
     }    
     }else{
-       $fixture_list = "<div class='jumbotron'> <h3>Fixtures Currently Unavailable 2</h3> </div>";
+       $fixture_list = "<div class='jumbotron'> <h3>Fixtures Currently Unavailable **</h3> </div>";
    }
             }
         }else{
-            $fixture_list = "<div class='jumbotron'><h3>Fixtures Currently Unavailable 3</h3> </div>";
+            $fixture_list = "<div class='jumbotron'><h3>Fixtures Currently Unavailable **</h3> </div>";
         }
     }else{
-            $fixture_list = "<div class='jumbotron'> <h3>Couldn't Execute Query</h3> </div>";
+            $fixture_list = "<div class='jumbotron'> <h3>Fatal Error *</h3> </div>";
     }
 
 /************************************************/
@@ -396,8 +396,9 @@ else if($position=='ST' || $position=='CF' || $position== 'LW' || $position=='RW
                  $assists = (int)$assists;
                  
                 //code below sets the initial div structure and content
-                $player_stats = "
-                <div class='row'>          
+                $player_stats = "                
+                <div class='row'>
+                
                 <div class='col-sm-4'>
                
                <table class='table table-hover table-striped'>

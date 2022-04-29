@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     $_SESSION['user_name'] = $u_user_name;
                     $_SESSION['user_type'] = "user";
                     $conn->close();
-                    header("location: ../leagues.php");
+                    header("location: ../league_selected.php?league_id=1&code=mw-tsl&league_name=TNM Super League");
                     exit();
                     
                 }else{

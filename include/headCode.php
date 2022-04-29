@@ -35,7 +35,7 @@
     <!--NAV SEARCH BOX JQUERY CODE-->
     <script>
         $("document").ready(function(){
-            $("#search_box").keyup(function(){
+            $("#search_box").keypress(function(){
                 var data = $("#search_box").val();
                 data = data.trim();                               
 

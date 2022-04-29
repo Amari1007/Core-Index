@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="example">
             <ul class="nav navbar-nav">
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/index.php"?"active":" " ?> "> <a href="index.php">Players</a></li>
-                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/leagues.php"?"active":" " ?> "> <a href="leagues.php">Competitions</a></li>
+                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/leagues.php"?"active":" " ?> "> <a href="league_selected.php?league_id=1&code=mw-tsl&league_name=TNM Super League">TNM Super League</a></li>
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/clubs.php"?"active":" " ?> "> <a href="clubs.php">Clubs</a></li>
                 
                 <?php if( isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'admin' && isset($_SESSION['user_name']) ): ?>

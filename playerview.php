@@ -38,28 +38,30 @@ $player_data = json_decode($raw,true);
                     <?php echo $nation_info ?>
                 </section>
                 
-                <section style="margin:80px 0px 100px 0px">
-                    <h3 style="padding-left:150px">Latest Fixtures</h3>
-                    <?php echo $fixture_list; ?>
-                </section>
+            <div class="container-fluid">
+                <h3 style="padding-left:150px">Latest Fixtures</h3>
+                <?php echo $fixture_list; ?>
+            </div>
             
             </div> 
-                                
-             <!--<div id="fixture_list
-            </div> -->
+                      
+            <div class="container-fluid">            
+                <h2 style="text-align:center;margin-bottom:50px">Performance Data</h2>
+
+                <?php echo $player_stats ?>
+
+                <?php echo $position_data ?>                
+            </div>
             
-            <?php echo $player_stats ?>
             
-            <?php echo $position_data ?>
-            
-            
+            <!-- below is a table displaying team mates -->
             <div style="width:80%; margin:auto">
                 <h3>Team Mates</h3>
                 <table class="table-striped">
-                    <tr><th colspan="2">Player Name</th><th>Position</th><th>Age</th><th>Score</th></tr>
+                    <tr><th colspan="2">Player Name</th><th>Position</th><th>Age</th><th>Rating</th></tr>
         
                     <?php 
-                    @$conn = new mysqli("localhost","Admin","123abc","core");
+                    require_once("include/coreDB.php");
                     
                     //output players from player table matching club name
                     if($result = $conn->query("SELECT * FROM players WHERE club='$club_name' and player_ID!=$playerid ")){
