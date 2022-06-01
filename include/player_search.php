@@ -13,8 +13,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     $('document').ready(function(){
                     $('#player_id_$player_ID').click(function(){
                         var player_id_$player_ID = {playerid:$player_ID, fname:'$fname', lname:'$lname', club_name:'$club', nationality:'$nationality'} 
-                        var x = JSON.stringify(player_id_$player_ID);
-                        
+                        var x = JSON.stringify(player_id_$player_ID);                        
                         $.post(
                             'include/player_data.php',
                             {
@@ -31,12 +30,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                         
                     });
                 });
-                </script>
-                
-                <li style='padding:10px' onmouseover=\"this.style.background='lightgrey'\" onmouseout=\"this.style.background='white'\" title=\"See $lname's Bio\">
-                
-                <a href='playerview.php' id='player_id_$player_ID'>
-                
+                </script>                
+                <li style='padding:10px' onmouseover=\"this.style.background='lightgrey'\" onmouseout=\"this.style.background='white'\" title=\"See $lname's Bio\">                
+                <a href='playerview.php' id='player_id_$player_ID'>                
                 <img src='$player_pic' width='50' onerror='player_imgerror(this)'>
                 $fname $lname
                 <span style='font-size:14px;display:block;font-weight:bold;'>$club</span>
@@ -57,7 +53,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 }else{
     echo "<li style='padding:10px'>Fatal Error 2</li>";	
 }
-
 
 
 ?>

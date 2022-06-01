@@ -16,8 +16,9 @@ require_once("include/coreDB.php");
     <p id="display"></p>
     
     <main class="container-fluid">
-        
-        <div id="player_list" class="table-responsive">            
+                
+        <div id="player_list" class="table-responsive">      
+            <h3>SHOWING RECENTLY ADDED PLAYERS (1-20)* </h3>
             
             <?php 
                 include_once("include/player_list.php");

@@ -138,13 +138,8 @@ if(isset($_POST['match_ID']) && isset($_POST['user_id']) && isset($_POST['user_n
             <div id='away-vote' style='width:$away_perc%'> $away_perc% </div>
         </div>        
         ");
-
-        }
-
-                            
-                        
-        
-        
+            
+        }        
     }
 
     }else{
@@ -158,7 +153,6 @@ if(isset($_POST['match_ID']) && isset($_POST['user_id']) && isset($_POST['user_n
     echo "Fatal error 3";
     exit();
 }
-
     
 }else{
     $conn->close();

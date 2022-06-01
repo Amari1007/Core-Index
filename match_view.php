@@ -135,7 +135,7 @@ else{
       <!--  <div id="comments-box">
             <h2>Live Interactions</h2>
             <?php 
-            
+            /*
                 if($result = $conn->query(" SELECT * FROM `user_comments` ")){
                     if($result->num_rows > 0){
                     while($row = $result->fetch_assoc()){
@@ -174,7 +174,7 @@ else{
                     
                 }else{
                     echo "<div class='jumbotron'> <h3>A Fatal Error Occured</h3> </div>";
-                }
+                }*/
                 
             ?>
         </div>-->

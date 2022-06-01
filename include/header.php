@@ -6,28 +6,29 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php" style="color:white;font-weight:bold">Core Index</a>
+            <a class="navbar-brand" style="color:white;font-weight:bold; cursor:pointer" title="Welcome to Core Index">Core Index</a>
         </div>
         
         <div class="collapse navbar-collapse" id="example">
             <ul class="nav navbar-nav">
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/index.php"?"active":" " ?> "> <a href="index.php">Players</a></li>
-                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/leagues.php"?"active":" " ?> "> <a href="league_selected.php?league_id=1&code=mw-tsl&league_name=TNM Super League">TNM Super League</a></li>
+                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/leagues.php"?"active":" " ?> "> <a href="league_selected.php?league_id=1&code=mw-tsl&league_name=TNM Super League" title="See Scores And Fixtures">TNM Super League</a></li>
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/clubs.php"?"active":" " ?> "> <a href="clubs.php">Clubs</a></li>
                 
                 <?php if( isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'admin' && isset($_SESSION['user_name']) ): ?>
                 
-                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/community.php"?"active":" " ?> "> <a href="community.php">Developers</a></li>
+                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/community.php"?"active":" " ?> "> <a href="community.php" title="Contribute To Website's Database">Developers</a></li>
                 
                 <?php endif ?>
                 
             </ul>
+            
             <form class="navbar-form navbar-left" role="search"> 
                 <div class="dropdown form-group" id="dropdown_menu">
                     <input type="search" class="form-control" style="padding:15px;width:300px;border-radius:5px" id="search_box" data-toggle="dropdown" autocomplete="off" placeholder="Search For a Player...">
-                        <ul class="dropdown-menu" style='width:300px;z-index:3'>
-                            <li style='padding:10px'> No Results*****</li>
-                        </ul>
+                    <ul class="dropdown-menu" style='width:300px;z-index:3'>
+                        <li style='padding:10px'> No Results*****</li>
+                    </ul>
                 </div>
             </form>
             
