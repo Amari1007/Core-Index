@@ -1,20 +1,23 @@
 <?php
 session_start();
-
-require_once("include/coreDB.php");
+require("include/coreDB.php");
 
 if(!isset($_GET['match_ID'])){
+	$conn->close();
     header("Location:leagues.php");
 }
 else{
     extract($_GET);
+	if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
+		require("include/last_activity.php");
+	}
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <?php require_once("include/headCode.php") ;?>    
+    <?php require("include/headCode.php") ;?>    
     <head>
     <link rel="stylesheet" type="text/css" href="css/league_selectedphp/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/matchviewphp/style.css"/>
@@ -56,24 +59,25 @@ else{
      </script>
     </head>
 
-    <body>
+    <body dir="ltr">
         
-    <?php require_once("include/header.php") ?>
+    <?php require("include/header.php") ?>
         
-    <?php require_once("include/league_navtab.php") ?>
+    <?php require("include/league_navtab.php") ?>
     
-    <main class="container">  
+    <main>  
+	
         <?php 
             require("include/retrieve_match_header.php");
         ?>   
         
-        <div class="container" id="vote-block">
+        <div id="vote-block">
             <?php 
                 require("include/check_vote_history.php");
             ?>   
         </div>
         
-        <script> 
+        <script>
             $(document).ready(function(){
                $("div #vote-block-1 .btn").click(function(){    
                    
@@ -100,9 +104,9 @@ else{
                    $.post(
                        "include/get_votes.php",
                        {
-                           match_ID: <?php echo $match_ID;  ?>,
-                           user_id: <?php echo $_SESSION['user_id']; ?>,
-                           user_name: " <?php echo $_SESSION['user_name']; ?> ",
+                           match_ID: <?php echo isset($match_ID)?$match_ID:Null; ?>,
+                           user_id: <?php echo isset($_SESSION['user_id'])?$_SESSION['user_id']:999999999999; ?>,
+                           user_name: " <?php echo isset($_SESSION['user_name'])?$_SESSION['user_name']:Null; ?> ",
                            home_add: home_add,
                            draw_add: draw_add,
                            away_add: away_add
@@ -128,60 +132,126 @@ else{
         
         </script>
         
-        <?php 
-            require("include/retrieve_match_info_box.php");
-        ?> 
+			<?php 
+				require("include/retrieve_match_info_box.php");
+			?> 
         
-      <!--  <div id="comments-box">
-            <h2>Live Interactions</h2>
-            <?php 
-            /*
-                if($result = $conn->query(" SELECT * FROM `user_comments` ")){
-                    if($result->num_rows > 0){
-                    while($row = $result->fetch_assoc()){
-                        extract($row);
-                
-                        $comment_date = date("d M, Y",strtotime($comment_date)); //converts date milliseconds to string date
-                        
-                        $comment_time = strtotime($comment_time); //converts to time value if original value is text
-                        $comment_time = date("H:i",$comment_time); // converts to string Hour:Minute time format
-                        
-                        echo("
-                            <div class='user-comment'>
-                                
-                                <div class='user-comment-name'> $user_name 
-                                <span class='glyphicon glyphicon-user'> </span>
-                                </div>
-                                
-                                <div class='user-comment-data'> $comment_data 
-                                </div>
-                                
-                                <div class='user-comment-time'>Commented on $comment_date at $comment_time 
-                                <span class='glyphicon glyphicon-time'> </span>
-                                </div>
-                                
-                            </div>
-                        ");
-                        
-                        }
-                    
-                    }else{
-                        echo "
-                        <div class='jumbotron'> <h3> Nothing to see here.... yet </h3> <button class='btn btn-danger'>Add Comment</button></div>
-                        
-                        ";
-                    }
-                    
-                }else{
-                    echo "<div class='jumbotron'> <h3>A Fatal Error Occured</h3> </div>";
-                }*/
-                
-            ?>
-        </div>-->
+        <div id="comments-box">
+            <div id="comments-box-header"> <span class='text-danger'> <?php $rows = $conn->query("SELECT * FROM `user_comments`  WHERE `event_id`={$_GET['match_ID']} "); echo count($rows->fetch_all() ); $conn->close(); ?> </span> Comments</div>
+			
+			<div id='comments-box-insert'> 
+				<div id='user-pic'> <img src='Media/Icons/user-icon.png' width='40px' onerror='player_imgerror(this)'> </div>				
+				<div id='insert-comment'>
+					<div id='comment-insert-form'>
+						<!-- try changing from input to textarea onfocus -->
+						<div id='comment-insert-textarea' contenteditable='true' name='user_comment' onkeyup='user_typing(this)' placeholder='Leave a comment' rows='2' cols='70' value='' dir='ltr'>Leave a comment</div>
+						<button id='comment-insert-form-btn' type='submit' onclick='input_submit(this)' disabled class='btn btn-success'>Reply</button> 
+					</div>
+				</div>				
+			</div>
+			
+			<div id="comments-box-inner">
+			<!-- Comments will come under here -->
+			
+			<?php 
+				require("include/coreDB.php");				
+				
+				if($comm_retrieve = $conn->query(" SELECT * FROM `user_comments` WHERE `event_id`={$_GET['match_ID']} ORDER BY comment_date DESC, unix_time*1 DESC LIMIT 20 ") ){
+					if($comm_retrieve->num_rows > 0){
+						while($comm_response = $comm_retrieve->fetch_assoc()){
+							$unix_time = (int)$comm_response['unix_time'];							
+							
+							if( time()-$unix_time<=3600 ){								
+								if( time()-$unix_time>60 && time()-$unix_time<3600 ){
+									/*ABOUT AN HOUR*/
+									$comment_time = (int) ((time()-$unix_time )/60 )." minutes ago";
+								}
+								else if( time()-$unix_time<=60 ){
+									/*LESS THAN A MINUTE*/
+									$comment_time = "Just now";
+								}
+								
+							}else{
+								if( time()-$unix_time>=3600 && time()-$unix_time ){
+									$comment_time = (int)( (time()-$unix_time)/3600 )." hours ago";
+								}else{
+									/*FULL TIME*/
+									$comment_time = date("d M y | H:i A",$unix_time);
+								}
+							}
+							
+							echo("
+								<div class='comments-box-user'> 
+									<div class='comments-user-pic'> <img src='Media/Icons/user-icon.png' width='30px' onerror='player_imgerror(this)'> </div>
+									<div class='user-comments-enclosure'>
+										<div class='comments-user-info'> <span>&bull; {$comm_response['user_name']} &bull;</span> <code class='text-danger'>{$comment_time}</code> </div>
+										<div class='comments-user-comment'>{$comm_response['comment_data']}</div>
+									</div>
+								</div>
+							");
+							
+						}
+					}
+				}
+			
+			?>
+			
+			</div>			
+		</div>
         
     </main>
-        
-   <?php include_once("include/footer.php"); ?>
+    
+	<script> 
+		function user_typing(obj){
+			const comm_btn = document.getElementById('comment-insert-form-btn');
+			const user_comment = obj.value.trim();
+			if(user_comment=="" || obj.value == 'undefined'){
+				//DISABLE BUTTON IF INPUT FIELD IS EMPTY
+				comm_btn.disabled = 'true';
+			}
+			else if(user_comment != '' || user_comment != 'undefined'){
+				comm_btn.removeAttribute('disabled');
+			}
+			
+		}
+		
+		function input_submit(obj){
+			//const get_form = document.getElementById('comment-insert-form');
+			const user_input = document.getElementById('comment-insert-textarea');
+			http_send_comment(user_input,"POST","include/process_user_comments.php");
+		}
+		
+		function http_send_comment(x_input,method, url){
+			const xhttp = new XMLHttpRequest();
+			xhttp.open(method,url,true);
+			xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			const data = "user_comment="+x_input.value+"&match_ID= <?php echo isset($_GET['match_ID'])?$_GET['match_ID']:"chaupi"; ?> ";
+			xhttp.send(data);
+			xhttp.onreadystatechange = function(){
+				if(this.status==200 && this.readyState==4){
+					
+					if(parseInt(this.responseText)==1){ //SUCCESSFULL
+						location.reload();
+					}
+					else if(parseInt(this.responseText)==2){
+						alert("An error occured in the database");
+					}else{
+						alert("Error: "+this.responseText);
+					}
+					
+				}else if(this.status==404){
+					alert("File not found");
+				}
+				
+			}
+			
+		}
+		
+	</script>
+	
+   <?php include("include/footer.php"); ?>
 
     </body>    
 </html>
+
+

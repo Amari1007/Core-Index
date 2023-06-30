@@ -1,10 +1,15 @@
 <?php
- 
-@$conn = new mysqli("localhost","Admin","123abc","core");
-//Opens connection to Core database with $conn object
+$host = "localhost"; 
+$user = "admin"; 
+$password = "abc123"; 
+$database = "core"; //this could be optional later
+
+@$conn = new mysqli($host,$user,$password,$database);
 
 if($conn->connect_error){
-  echo "<p style='{color:red}'> Database connection error!: $conn->connect_error </p>";
+	echo "<h2> <code>Sorry, an error occured while connecting to the database.</code></h2>";
+	//$conn->close();
+	exit();	
 }
 
 ?>

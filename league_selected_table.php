@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-require_once("include/coreDB.php");
+require("include/coreDB.php");
 
 if(!isset($_GET['code'])){
     $conn->close();
@@ -10,6 +9,9 @@ if(!isset($_GET['code'])){
 }
 else{
     extract($_GET);
+	if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
+		require("include/last_activity.php");
+	}
 }
 
 ?>
@@ -36,7 +38,7 @@ else{
         
     
     <main class="container">
-        <h2>League Table 2022 <span style="font-size:14px">&bull; Last updated on 4-17-2022 &bull;</span></h2>
+        <h2>League Table 2022 <span style="font-size:14px">&bull; Last updated on 11-07-2022 &bull;</span></h2>
         
         <div id="league_table" class="table-responsive">
             

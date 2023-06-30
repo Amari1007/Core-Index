@@ -269,7 +269,6 @@ if($position=='CDM' || $position=='CM' || $position=='CAM' || $position=='LM' ||
               <h1 class='text-success' title='Average shots at goal every 90 minutes'>".round((90/$minutes_played)*$shots,2)."<small> Shots per 90</small></h1>
              </div>
              
-             
               <div class='col-sm-6'>
               <div class='pass_accuracy'>
               <script> 

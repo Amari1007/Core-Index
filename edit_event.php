@@ -2,7 +2,7 @@
 session_start();
 
 if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SESSION['user_name']) ){
-    
+	require("include/last_activity.php");
 }else{
     header("location:sign_in.php");
     exit();

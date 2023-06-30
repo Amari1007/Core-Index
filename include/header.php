@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="example">
             <ul class="nav navbar-nav">
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/index.php"?"active":" " ?> "> <a href="index.php">Players</a></li>
-                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/leagues.php"?"active":" " ?> "> <a href="league_selected.php?league_id=1&code=mw-tsl&league_name=TNM Super League" title="See Scores And Fixtures">TNM Super League</a></li>
+                <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/league_selected.php"?"active":" " ?> "> <a href="league_selected.php?league_id=1&code=mw-tsl&league_name=TNM Super League" title="See Scores And Fixtures">TNM Super League</a></li>
                 <li class="<?php echo $_SERVER['PHP_SELF']=="/Core/clubs.php"?"active":" " ?> "> <a href="clubs.php">Clubs</a></li>
                 
                 <?php if( isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'admin' && isset($_SESSION['user_name']) ): ?>
@@ -23,11 +23,12 @@
                 
             </ul>
             
+			<!-- NAV SEARCH BOX CODE STRUCTURE -->
             <form class="navbar-form navbar-left" role="search"> 
                 <div class="dropdown form-group" id="dropdown_menu">
                     <input type="search" class="form-control" style="padding:15px;width:300px;border-radius:5px" id="search_box" data-toggle="dropdown" autocomplete="off" placeholder="Search For a Player...">
                     <ul class="dropdown-menu" style='width:300px;z-index:3'>
-                        <li style='padding:10px'> No Results*****</li>
+                        <li style='padding:10px'>No Results*****</li>
                     </ul>
                 </div>
             </form>
@@ -50,6 +51,11 @@
                         <li class="divider"></li>
                     <?php endif ?>                    
                     
+                    <!-- SETTINGS PAGE -->
+                    <li><a href="settings.php">Settings</a></li>
+                    <li class="divider"></li>
+                    
+                    <!-- User Logout -->
                     <li><a href="include/log_out.php" title="Logout?">Logout</a></li>
                     <li class="divider"></li>
                     

@@ -1,7 +1,8 @@
 <?php 
 if($_SERVER['REQUEST_METHOD']=='POST'){
-    require_once("coreDB.php");
+    require("coreDB.php");
     
+    // THIS FUNCTION CLEANS USER INPUT
     function verify_info($data){
     $data = trim($data);
     $data = stripslashes($data);
@@ -22,12 +23,13 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 //verify if characters exactly match each other and start session if true
                 if($row['user_name'] === $u_user_name){
                     
-                    //verify if user password matches
+                    //verify if user password matches the one in database
                     if($row['password'] === $u_password){
                         session_start();
                         $_SESSION['user_id'] = $row['user_id'];
                         $_SESSION['user_type'] = $row['user_type'];
                         $_SESSION['user_name'] = $row['user_name'];
+						$_SESSION['last_activity'] = time();//session timeout variable EXPERIMENTAL
                     
                         //session_unset(); //comment this later
                         $conn->close();

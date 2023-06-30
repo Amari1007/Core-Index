@@ -1,13 +1,16 @@
 <?php
 session_start();
-
-require_once("include/coreDB.php");
+require("include/coreDB.php");
 
 if(!isset($_GET['code'])){
+	$conn->close();
     header('Location:leagues.php');
 }
 else{
     extract($_GET);
+	if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
+		require("include/last_activity.php");
+	}
 }
 
 ?>
@@ -33,7 +36,7 @@ else{
     
         /**code below only selects from DEFENDERS (CB,LB,RB,RWB,LWB) will be revisited later**/
 
-        if($result = $conn->query("SELECT * FROM `player_points` order by rating*1 DESC limit 50 ")){
+        if($result = $conn->query("SELECT * FROM `player_points` order by rating*1 DESC limit 20 ")){
 
         //execute query in database and store results in $result var
         if($result->num_rows > 0 ){
@@ -162,7 +165,7 @@ else{
             
         </main>
     
-   <?php include_once("include/footer.php"); ?>
+   <?php include("include/footer.php"); ?>
         
     </body>    
 </html>

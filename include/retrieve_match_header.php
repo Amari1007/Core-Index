@@ -1,11 +1,13 @@
 <?php  
+
+//Status = [played,disabled,live,upcoming,report,postponed];
 if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT 1")){
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
             extract($row);
             
             //code below retrieves Home Club pic
-            $home_team_logo = null;
+            $home_team_logo = NULL;
             if($club_pic_home = $conn->query("SELECT * FROM clubs WHERE club_name LIKE '%$home_team%' AND league_code='mw-tsl' LIMIT 1 ")){
                 if($club_pic_home->num_rows>0){
                     while($get_pic_home = $club_pic_home->fetch_assoc()){
@@ -13,14 +15,14 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
                         }
 
                     }else{
-                        $home_team_logo = null;                
+                        $home_team_logo = NULL;                
                     }
                 }else{
-                $home_team_logo = null;
+                $home_team_logo = NULL;
             }
             
             //code below retrieves Away Club pic
-            $away_team_logo = null;
+            $away_team_logo = NULL;
             if($club_pic_away = $conn->query("SELECT * FROM clubs WHERE club_name LIKE '%$away_team%' AND league_code='mw-tsl' LIMIT 1 ")){
                 if($club_pic_away->num_rows>0){
                     while($get_pic_away = $club_pic_away->fetch_assoc()){
@@ -28,137 +30,180 @@ if($result = $conn->query("SELECT * FROM fixtures WHERE match_ID=$match_ID LIMIT
                         }
 
                     }else{
-                        $away_team_logo = null;                
+                        $away_team_logo = NULL;                
                     }
                 }else{
-                $away_team_logo = null;
+                $away_team_logo = NULL;
             }
             
             $date = strtotime($date);
-            $date = date("d M, Y",$date); //converts date milliseconds to string date
+            $date = date("D d M, Y",$date); //converts date milliseconds to string date
             $time = strtotime($time); //converts to time value if original value is text
             $time = date("H:i",$time); // converts to string Hour:Minute time format
-            $scores = " ";            
-            
-            //code below will display score or KO time
+            $scores = " ";
+			$get_home_scorers = json_decode($home_scorers,true);
+			$get_away_scorers = json_decode($away_scorers,true);
+			
+			if(isset($get_home_scorers)){
+				if(count($get_home_scorers['data'])>0){				
+					$display_home_scorers=NULL;
+					for($counter=0;$counter<count($get_home_scorers['data']);$counter++){
+						$display_home_scorers .= $get_home_scorers['data'][$counter]['name']." (".$get_home_scorers['data'][$counter]['minute']."') ";	
+					}	
+				}
+			}else{
+				$display_home_scorers=NULL;
+			}
+			
+			if(isset($get_away_scorers)){
+				if(count($get_away_scorers['data'])>0){
+					$display_away_scorers=NULL;
+					for($counter=0;$counter<count($get_away_scorers['data']);$counter++){
+						$display_away_scorers .= $get_away_scorers['data'][$counter]['name']." (".$get_away_scorers['data'][$counter]['minute']."') ";	
+					}
+				}
+			}else{
+				$display_away_scorers=NULL;
+			}
+			
+            //code below will determin score or KO time output
             if($status == 'live'){
-                $scores = " 
-                
-                <div style='width:100%;text-align:center;font-weight:bold;color:white;padding:5px;'>
-                    
-                    <div id='home-goals' style='background-color:#2866f6;padding:2px'>
-                        $home_goals
-                    </div>
-
-                    <div id='away-goals' style='background-color:#2866f6;padding:2px'>
-                        $away_goals
-                    </div>
-                    
-                    <span style='text-align:center;display:block;color:#2866f6;font-size:13px'>
-                        &bull; live
-                    </span>
-                    
-                </div>
-                
-                
-                ";
+				echo "
+			
+			<div class='a1'> 
+			
+				<div class='fader'> <!-- '.fader' fades background picture -->
+			
+					<div class='b1'> 
+					
+							<div class='header_box'> $date | $competition | MD $MD</div>					
+							
+							<div class='c1'> 
+								<div class='home_box'> 
+									<div class='home_logo'> <img src='{$home_team_logo}' width='100px' class='img-circle' onerror='match_view_team_imgerror(this)' alt='{$home_team}.logo'/> </div>
+									<div class='home_name'>$home_team</div> 
+									<div class='home_scorers'> <span>$display_home_scorers</span> </div>
+								</div>
+								
+								<div class='team_scores'>
+									<div class='score_box_live'>
+											<div class='home_score'>$home_goals</div>
+											<div class='away_score'>$away_goals</div>
+									</div>
+									
+									<div class='time_elapsed' style='font-size:20px'>LIVE'</div>
+									<div class='half_time_txt'>HT</div>
+									<div class='half_time_score'> - </div>
+								</div>
+								
+								<div class='away_box'> 
+									<div class='away_logo'> <img src='{$away_team_logo}' width='100px' class='img-circle' onerror='match_view_team_imgerror(this)' alt='{$away_team}.logo'/> </div>
+									<div class='away_name'>$away_team</div>
+									<div class='away_scorers'> <span>$display_away_scorers</span> </div> 
+								</div>
+							</div>
+						
+					</div>			
+				
+				</div>
+				
+			</div>  
+			";
             }
             elseif($status == 'upcoming'){
-                $scores = " 
-                
-                <div style='width:100%;text-align:center;background-color:#b3b3b3c4;font-weight:bold;color:black;padding:5px;'>
-                    $time
-                </div>
-                
-                ";
+				echo "
+			
+			<div class='a1'> 
+			
+				<div class='fader'> <!-- '.fader' fades background picture -->
+			
+					<div class='b1'> 
+					
+							<div class='header_box'> $date | $competition | MD $MD</div>					
+							
+							<div class='c1'> 
+								<div class='home_box'> 
+									<div class='home_logo'> <img src='{$home_team_logo}' width='100px' class='img-circle' onerror='match_view_team_imgerror(this)' alt='{$home_team}.logo'/> </div>
+									<div class='home_name'>$home_team</div> 
+									<div class='home_scorers'> <span>$display_home_scorers</span> </div>
+								</div>
+								
+								<div class='team_scores'>
+									<div class='score_box'>
+											<div class='KO_time'>$time</div>
+									</div>
+									
+									<div class='time_elapsed'>$minutes_played</div>
+									<div class='half_time_txt'></div>
+									<div class='half_time_score'></div>
+								</div>
+								
+								<div class='away_box'> 
+									<div class='away_logo'> <img src='{$away_team_logo}' width='100px' class='img-circle' onerror='match_view_team_imgerror(this)' alt='{$away_team}.logo'/> </div>
+									<div class='away_name'>$away_team</div>
+									<div class='away_scorers'> <span>$display_away_scorers</span> </div> 
+								</div>
+							</div>
+						
+					</div>			
+				
+				</div>
+				
+			</div>  
+			";
                 
             }
-            elseif($status == 'report'){
-                $scores = " 
-                
-                <div style='width:100%;text-align:center;font-weight:bold;color:black;padding:5px;'>
-                    
-                    <div id='home-goals'>
-                        $home_goals
-                    </div>
-
-                    <div id='away-goals'>
-                        $away_goals
-                    </div>
-                    
-                    <span style='text-align:center;display:block;color:black;font-size:13px;'>
-                        FT
-                    </span>
-                    
-                </div>
-                
-                ";
-                
-                
-            }
-            elseif($status == 'played'){
-                $scores = " 
-                
-                <div style='width:100%;text-align:center;font-weight:bold;color:black;padding:0px;'>
-                    
-                    <div id='home-goals'>
-                        $home_goals
-                    </div>
-
-                    <div id='away-goals'>
-                        $away_goals
-                    </div>
-                    
-                    <span style='text-align:center;display:block;color:black;font-size:13px;'>
-                        FT
-                    </span>
-                    
-                </div>
-                
-                ";
+            elseif($status == 'played' || $status=='disabled' || $status == 'report'){
+				echo "
+			
+			<div class='a1'> 
+			
+				<div class='fader'> <!-- '.fader' fades background picture -->
+			
+					<div class='b1'> 
+					
+							<div class='header_box'> $date | $competition | MD $MD</div>					
+							
+							<div class='c1'> 
+								<div class='home_box'> 
+									<div class='home_logo'> <img src='{$home_team_logo}' width='100px' class='img-circle' onerror='match_view_team_imgerror(this)' alt='{$home_team}.logo'/> </div>
+									<div class='home_name'>$home_team</div> 
+									<div class='home_scorers'> <span>$display_home_scorers</span> </div>
+								</div>
+								
+								<div class='team_scores'>
+									<div class='score_box'>
+											<div class='home_score'>$home_goals</div>
+											<div class='away_score'>$away_goals</div>
+									</div>
+									
+									<div class='time_elapsed'>$minutes_played</div>
+									<div class='half_time_txt'>HT</div>
+									<div class='half_time_score'> - </div>
+								</div>
+								
+								<div class='away_box'> 
+									<div class='away_logo'> <img src='{$away_team_logo}' width='100px' class='img-circle' onerror='match_view_team_imgerror(this)' alt='{$away_team}.logo'/> </div>
+									<div class='away_name'>$away_team</div>
+									<div class='away_scorers'> <span>$display_away_scorers</span> </div> 
+								</div>
+							</div>
+						
+					</div>			
+				
+				</div>
+				
+			</div>  
+			";
                 
             }
             else{
-                $scores = " 
-                
+                echo "
                 <div style='width:100%;text-align:center;background-color:#b3b3b3c4;font-weight:bold;color:black;padding:5px;'>
                     Error:404
                 </div>
-                
-                ";
-                
+                ";                
             }
-
-            echo"
-            <div class='match_info'> 
-
-            <h5>$league_name &bull; $date</h5>
-
-            <div class='teams'>
-            
-            <div id='teams-block'> 
-            
-                <div id='home-team-bar' title='$home_team' >
-                    <img src='$home_team_logo' class='img-circle' style='max-width:15%;height:auto;' onerror='match_view_team_imgerror(this)' alt='$home_team logo' >
-                    $home_team
-                </div>
-                
-                <div id='score-bar'>
-                    $scores  
-                </div>
-                
-                <div id='away-team-bar' title='$away_team' >
-                    $away_team
-                    <img src='$away_team_logo' class='img-circle' style='max-width:15%;height:auto;' onerror='match_view_team_imgerror(this)' alt='$away_team logo'>
-                </div>  
-                
-            </div> <!-- #teams-block -->
-            
-            </div> <!-- .teams -->
-            
-            </div>  <!-- .match_info -->  
-            
-            ";
         }
     }
     else{

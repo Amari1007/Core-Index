@@ -11,6 +11,7 @@ html{
 
 body{
     overflow-x: hidden;
+	/*pointer-events:none;*/ /*makes everything unclickable*/
 /*    scroll-behavior: smooth;*/
 }
 
@@ -20,6 +21,42 @@ main{
 
 /********************HEADERGROUP***********************/
 
+/*********** ERROR BOX ***********/
+#error_box{
+	min-width:100%;
+	min-height:100%;
+	position:fixed;
+	background:rgba(0,0,0,0.8);
+}
+
+#error_box #error_box_msg{
+	position:fixed;
+	background:white;
+	min-width:200px;
+	min-height:150px;
+	top:36%;
+	left:42%;
+	border-radius:7px;
+	text-align:center;
+}
+
+#error_box_msg #error_box_msg_header{
+	background:rgba(200,0,0,1);
+	color:white;
+	font-size:18px;
+	padding:5px;
+	border-radius:7px 7px 0px 0px;
+}
+
+#error_box_msg #error_box_msg_btn{
+	background:rgba(0,100,0,1);
+	color:white;
+	padding:10px;
+	margin:20px 0px 0px 0px;
+	text-align:center;
+	border-radius:5px;
+	border:0px solid white;
+}
 
 /**************FOOTER GROUP********************/
 footer{

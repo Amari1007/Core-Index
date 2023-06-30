@@ -1,6 +1,0 @@
-- user types name in search box
-- triggers search request algorithm
-- text typed is searched in database
-- when similar player names are found send list to UI
-- when no similar names found respond with message
-- send data back to user

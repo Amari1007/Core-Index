@@ -1,0 +1,38 @@
+.a1{
+/*    border: 1px solid black;*/
+    padding: 10px;
+}
+
+.a2{
+/*    border: 1px solid black;*/
+    padding: 5px;
+}
+
+.a3{
+/*    border: 1px solid black;  */
+    padding: 5px;
+}
+
+.a3-a1 {
+    font-size: 15px;
+}
+
+.a3-a1 input{
+    padding: 5px;
+}
+
+/* CHANGE USER ACCOUNT DETAILS */
+.b1-a1 p {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.b1-a1 button {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.b1-a1{
+    border: 1px solid black;
+    padding: 5px;        
+}

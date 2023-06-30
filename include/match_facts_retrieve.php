@@ -1,5 +1,5 @@
 <?php 
-require_once("coreDB.php");
+require("coreDB.php");
 
 if(!isset($_GET['match_ID'])){ 
     header("Location:../leagues.php");
@@ -10,13 +10,12 @@ else{
 extract($_GET);  
 }
 
-
 if($result = $conn->query("SELECT * FROM `fixtures` WHERE match_ID=$match_ID LIMIT 1")){
     if($result->num_rows > 0){
     while($row = $result->fetch_assoc()){
         extract($row);
         if(empty($home_possession) && empty($home_shots) && empty($home_corners) && empty($home_fouls) ){
-            echo "<div class='jumbotron'> <h3>No Match Stats Available</h3> </div>";
+            echo "<div style='padding:20px;text-align:center'> <h3>No match stats available....</h3> </div>";
             $conn->close();
             exit();
         }

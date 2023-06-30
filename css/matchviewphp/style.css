@@ -1,83 +1,181 @@
-.match_info{
-    margin: auto;
-    padding: 5px;
-/*    border: 1px solid black;*/
-    min-height: 100px;
+main{
+	/*border:1px solid black;*/
+	width:100%;
+	padding:0px;
+	margin-bottom:50px;
 }
 
-.match_info h5{
-    text-align: center;
+/********* MATCH RESULT AND TEAMS ***********/
+.a1{
+	border:0px solid black;
+	margin:auto;
+	width:99.5%;
+	height:350px;
+	/*padding:10px;*/
+	color:white;
+	background-image:url("../../Media/match_box_background.jpg");
+	background-repeat:no-repeat;
+	background-position:center;
+	background-attachment:scroll;
+	background-size:cover;
 }
 
-.teams{
-/*    border: 1px solid black;*/
-    text-align: center;
-    padding: 2px;
-/*    min-height:100px; */
+.a1 .fader{
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.75);
+}
+
+.b1{	
+	border:0px solid black;
+	padding:10px;
+	min-height:300px;
+}
+
+.b1 .header_box{
+	text-align:center;
+	font-weight:bold;
+	font-family:verdana;	
+	font-size:14px;	
+}
+
+.c1{ /*match overview here*/
+	border:0px solid black;
+	padding:5px;
+	min-height:250px;
+	margin-top:20px;
+	overflow:hidden;
+	text-align:center;
+}
+
+.c1 .home_box, .c1 .away_box{
+	/*min-height:180px;*/
+}
+
+.c1 .home_box{
+	border:0px solid black;
+	padding:0px;
+	float:left;
+	width:40%;
+	display:inline-block;
+	text-align:right;
+	font-weight:bold;
+	font-size:17px;
+	overflow:hidden;
+}
+
+.c1 .away_box{
+	border:0px solid black;
+	padding:0px;
+	float:right;
+	width:40%;
+	display:inline-block;
+	text-align:left;
+	font-weight:bold;
+	font-size:17px;
+	overflow:hidden;
+}
+
+.c1 .team_scores{
+	border:0px solid black;
+	padding:3px;
+	width:15%;
+	float:none;
+	display:inline-block;
+	text-align:center;
+	padding-top:30px;
+	overflow:hidden;
+}
+
+.c1 .score_box{
+}
+
+/************* LIVE SCORES ************/
+.score_box_live{
+	overflow:auto;
+	/*border:1px solid black;*/
+	padding:0px;
+	/*border-radius:7px;*/
+	color:white;
+	font-weight:bold;
+	font-size:30px;
+}
+	
+.score_box_live .home_score{
+	float:left;
+	background-color:#2866f6;
+	display:inline-block;
+	width:45%;
+}
+
+.score_box_live .away_score{
+	float:right;
+	background-color:#2866f6;
+	display:inline-block;
+	width:45%;
 }
 
 
-/*************** MATCH RESULT BOX *****************/
+/********************************/
 
-#teams-block{
-/*    border: 1px solid black;  */
-    min-height: 70px;
-    padding: 3px;
+.score_box .away_score, .score_box .home_score, .score_box .KO_time{
+	background-color:#ffd230;
+	border:1px solid black;
+	padding:0px;
+	border-radius:7px;
+	color:black;
+	font-weight:bold;
+	font-size:30px;
 }
 
-#teams-block div{
-    display: inline-block; /*KEEPS BARS IN-LINE*/
+.score_box .home_score{
+	float:left;
+	display:inline-block;
+	width:45%;
 }
 
-#teams-block #home-team-bar{
-    float: left;
-    width: 43%;
-    padding: 0px;
-    text-align: right;
-    font-size: 18px;
-    font-weight: bold;
-/*    border: 1px solid black;    */
+.score_box .away_score{
+	float:right;
+	display:inline-block;
+	width:45%;
 }
 
-#teams-block #away-team-bar{
-    float: right;
-    width: 43%;
-    padding: 0px;
-    text-align: left;
-    font-size: 18px;
-    font-weight: bold;
-/*    border: 1px solid black;*/
+.team_scores .time_elapsed{ /*minutes played box*/
+	color:#ffd230;
+	margin-top:50px;
 }
 
-#teams-block #score-bar{
-    float: none;
-    width: 10%;
-/*    padding: 0px; */
-    padding-top: 10px;
-/*    border: 1px solid black;    */
+.team_scores .half_time_txt, .team_scores .time_elapsed, .team_scores .half_time_score{
+	border:0px solid black;
+	display:block;
+	float:none;
+	clear:both;
+	font-weight:bold;
+	font-size:16px;
 }
 
-#teams-block #score-bar #home-goals{
-    float: left;
-    width: 48%;    
-    background-color: #ffd230;
-    padding: 0px;
-    font-size: 18px;
-/*    border: 1px solid black;*/    
+.team_scores .half_time_txt{
+	margin:10px 0px 2px 0px;
+	border-bottom:2px solid white;
 }
 
-#teams-block #score-bar #away-goals{
-    float: right;
-    width: 50%;
-    background-color: #ffd230;
-    padding: 0px;
-    font-size:18px;
-/*    border: 1px solid black;*/
+.team_scores .half_time_score{
+	/*font-weight:bold;*/
 }
+
+.home_box .home_scorers, .away_box .away_scorers{
+	border:0px solid black;
+	margin-top:15px;
+	overflow:hidden;
+	font-size:13px;
+	font-weight:100;
+	font-family:verdana;
+}
+
+/******* END OF  MATCH RESULT AND TEAMS******/
 
 
 /*************** MATCH FACTS BOX *****************/
-
 .match_facts{
 /*    text-align: center;*/
     margin: auto;
@@ -120,9 +218,11 @@
 /**************** VOTE BOX ********************/
 
 #vote-block{
-    width:100%;
-/*    border:1px solid black;*/
-    margin-bottom:100px;
+    width:85%;
+	padding:10px;
+	margin:auto;
+	/* border:1px solid black; */
+    margin-bottom:50px;
 }
 
 /******** BEFORE VOTE CAST *********/
@@ -259,50 +359,168 @@
 
 
 /**********************LINE UPS***********************/
-
-#home_lineup{
-/*    border: 1px solid black;*/
-    float: left;
-    width: 49%;
-    min-height: 300px;
+#bars{
+	border:0px solid black;	
+	padding:10px;
+	margin:auto;
+	width:99%;
+	height:100%;
+	margin-bottom:20px;
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 
-#away_lineup{
-/*    border: 1px solid black;*/
-    float: right;
-    width: 50%;
-     min-height: 300px;
+#bars #home_lineup .lineup_player, #bars #away_lineup .lineup_player{
+	border: 0px solid black;
+	margin:10px;
+	overflow-x:hidden; /* hide name if too long */
+}
+
+#bars #home_lineup{
+	border: 0px solid black;
+    float:left;
+    width:49%;
+    /* min-height:300px; */
+	padding:10px;
+	text-align:left;
+}
+
+#bars #away_lineup{
+	border: 0px solid black;
+	border-left: 2px solid #e8491d;
+    float:right;
+    width:50%;
+    /* min-height:300px; */
+	padding:10px;
+	text-align:left;
+	/* border-left:1px solid #e8491d; */
 }
 
 
 /*************** COMMENTS BOX ***************/
+#comments-box div{
+	border:1px solid black; /*comment this later*/
+	padding:10px;
+}
+
+/*IF CONTENT OVERFLOWS*/
+#comments-box, #comments-box #comments-box-insert, #comments-box #comments-box-inner, #comments-box-inner .comments-box-user{
+	overflow-x:auto;
+}
+	
 #comments-box{
-/*    border: 1px solid black;*/
+	border: 1px solid black;
+	min-height:250px;
+	/*background-color:#221c1a;*/
+	/*color:white;*/
+	width:90%;
+	margin:auto;
     border-top: 3px solid #e8491d;
-    border-bottom: 3px solid #e8491d;
-    padding: 5px;
+    /* border-bottom: 3px solid #e8491d; */
+    padding:10px;
 }
 
-#comments-box .user-comment{
-    border: 1px solid black;
-    padding: 10px;
+#comments-box #comments-box-header, #comments-box #comments-box-insert, #comments-box #comments-box-inner{
+	display:block;
+	margin-bottom:15px;
 }
 
-#comments-box .user-comment-name{
-    border: 1px solid black;
-    padding: 5px;
-    font-size:18px;
-    font-weight: bold;
+#comments-box #comments-box-header{
+	/*margin-bottom:15px;*/
+	font-size:20px;
+	font-weight:bold;	
 }
 
-#comments-box .user-comment-data{
-    border: 1px solid black;
-    padding: 5px;
+/***** INSERT COMMENTS BOX *****/
+#comments-box-insert #insert-comment{
+	float:right;
+	display:inline-block;
+	width:85%;
 }
 
-#comments-box .user-comment-time{
-    border: 1px solid black;
-    padding: 5px;
-    font-size: 13px;
-    color: #0A6CFF;
+#comment-insert-form #comment-insert-textarea:focus{
+	border-bottom:2px solid black;
+}
+
+#comment-insert-form div{
+	border:0px solid white;
+	outline:0px solid white
+}
+
+#comment-insert-form #comment-insert-textarea{
+	border-bottom:1px solid black;
+	margin-bottom:5px;
+}
+
+
+
+#comments-box #comments-box-insert{
+	
+}
+
+#comments-box-insert #user-pic{
+	float:left;
+	display:inline-block;
+	width:13%;
+}
+/*****************************/
+
+#comments-box-inner .comments-box-user .comments-user-pic{
+	display:inline-block;
+	float:left;
+	width:13%;
+}
+
+#comments-box-inner .comments-box-user .user-comments-enclosure{
+	display:inline-block;
+	float:right;
+	width:85%;
+}
+
+#comments-box-inner .user-comments-enclosure .comments-user-info{
+	margin-bottom:10px;
+	display:block;
+}
+
+#comments-box-inner .user-comments-enclosure .comments-user-comment{
+	display:block;
+}
+
+
+/************** MEDIA QUERIES*************/
+@media(max-width:750px){
+	.c1 .home_box{
+		width:35%;
+	}
+	
+	.c1 .away_box{
+		width:35%;
+	}
+	
+	.c1 .team_scores{
+		width:25%;	
+	}
+	
+}
+
+@media(max-width:480px){
+	
+	#bars #away_lineup, #bars #home_lineup{
+		padding:5px;
+	}
+	
+	#comments-box{
+		width:100%;
+	}
+	
+	.score_box .KO_time{
+		font-size:25px;
+		border-radius:7px;
+	}
+	
+	.score_box_live div{
+		font-size:25px;
+	}
+	
+	
 }

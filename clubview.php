@@ -1,6 +1,11 @@
 <?php 
 session_start();
-require_once("include/coreDB.php"); //import database connector
+require("include/coreDB.php"); //import database connector
+
+if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
+	//IF USER IS LOGGED IN UPDATE SESSION
+    require("include/last_activity.php"); //will redirect if session expires
+}
 
     //check if post or get method was used
             
@@ -47,42 +52,41 @@ require_once("include/coreDB.php"); //import database connector
                     
                     
                     $output = " 
-                    
-             <table class='table-hover'>
-                 <tr>
-                    <td colspan='2' style='text-align:center'><img class='img-circle' width='120' src='$club_pic' onerror='team_imgerror(this)' alt='image N/A'></td>		
-                </tr>
-                <tr>
-                    <td>Club Name</td>
-                    <td> <a href='clubview.php?clubid=$clubid&club_name=$club_name'>$club_name</a></td>		
-                </tr>
-                <tr>
-                    <td>Country</td>
-                    <td>$country</td>		
-                </tr>
-                <tr>
-                    <td>Home Stadium</td>
-                    <td>$stadium".($stadium_capacity!=null?', ('.$stadium_capacity.' Capacity)':'')."</td>		
-                </tr>
-                <tr>
-                    <td>Manager</td>
-                    <td>$manager</td>		
-                </tr>
-                <tr>
-                    <td>Formation</td>
-                    <td>$formation</td>		
-                </tr>
-                <tr>
-                    <td>League</td>   
-                    <td>$league</td>		
-                </tr>  
-                 <tr>
-                    <td>League Position</td>   
-                    <td> <span class='p$team_position'>$team_position</span> </td>		
-                </tr>  
-  
-                </table>
-                    ";
+					<table class='table-hover'>
+					 <tr>
+						<td colspan='2' style='text-align:center'><img class='img-circle' width='120' src='$club_pic' onerror='team_imgerror(this)' alt='image N/A'></td>		
+					</tr>
+					<tr>
+						<td>Club Name</td>
+						<td> <a href='clubview.php?clubid=$clubid&club_name=$club_name'>$club_name</a></td>		
+					</tr>
+					<tr>
+						<td>Country</td>
+						<td>$country</td>		
+					</tr>
+					<tr>
+						<td>Home Stadium</td>
+						<td>$stadium".($stadium_capacity!=null?', ('.$stadium_capacity.' Capacity)':'')."</td>		
+					</tr>
+					<tr>
+						<td>Manager</td>
+						<td>$manager</td>		
+					</tr>
+					<tr>
+						<td>Formation</td>
+						<td>$formation</td>		
+					</tr>
+					<tr>
+						<td>League</td>   
+						<td>$league</td>		
+					</tr>  
+					 <tr>
+						<td>League Position</td>   
+						<td> <span class='p$team_position'>$team_position</span> </td>		
+					</tr>  
+
+					</table>
+						";
                 }
             }else{
                 echo "No results where found";
@@ -140,21 +144,21 @@ require_once("include/coreDB.php"); //import database connector
                 
            require("include/coreDB.php");
                 
-                //looking for the club in db then searching in fixtures
+             //LOOKING FOR THE CLUB IN DB THEN SEARCHING IN FIXTURES
             if($result2 = $conn->query("SELECT * FROM `clubs` WHERE club_name like'%$club_name%' limit 1")){
                 if($result2->num_rows>0){
                     while($clubdata = $result2->fetch_assoc()){
                         extract($clubdata);
            
-            if($result=$conn->query("SELECT * FROM `fixtures` where home_team like'%$club_name%' or away_team like'%$club_name%' ORDER BY `date` DESC LIMIT 5")){
-            
+            if($result=$conn->query("SELECT * FROM `fixtures` where home_team like'%$club_name%' or away_team like'%$club_name%' ORDER BY `date` DESC LIMIT 6")){
+            //SHOW LAST 6 FIXTURES
             if($result->num_rows > 0){
             
             while($row = $result->fetch_assoc()){
             extract($row);
                 
             $date = strtotime($date);
-            $date = date("d M, y",$date); //converts date milliseconds to string date
+            $date = date("d F, Y",$date); //converts date milliseconds to string date
             $time = strtotime($time); //converts to time value if original value is text
             $time = date("H:i",$time); // converts to string Hour:Minute time format
             $scores = " ";           
@@ -218,13 +222,23 @@ require_once("include/coreDB.php"); //import database connector
                 </div>    
                 ";                
             }
+			else if($status=='postponed'){
+                $scores = "                
+                <div id='scores'>
+                <a>
+                    <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>TBD</div> 
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:13px'>Postponed</span>
+                </div>    
+                ";                
+            }
             else{
                 $scores = "                
                 <div id='scores'>
                 <a>
-                    <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>$time</div> 
+                    <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>TBD</div> 
                 </a>
-                <span style='text-align:center;display:block;color:black;font-size:13px'></span>
+                <span style='text-align:center;display:block;color:black;font-size:13px'>Postponed</span>
                 </div>
                 ";
             }
@@ -343,7 +357,7 @@ require_once("include/coreDB.php"); //import database connector
             
         </main>                             
     
-       <?php require_once("include/footer.php"); ?>  
+       <?php require("include/footer.php"); ?>  
         
     </body>
 

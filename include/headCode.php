@@ -7,7 +7,7 @@
     <meta name="description" content="Football Stats"> 
     <meta name="author" content="Chaupi Ghambi"> 
     <meta name="keywords" content="Football, TNM Super League, Football Association of Malawi, Chaupi Ghambi"> 
-    
+	
     <!--lOAD JQUERY CSS AND JS FILES-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
@@ -67,4 +67,14 @@
         });
     </script> 
     
+	<style>
+		progress {
+		   -webkit-appearance: none;
+		}
+		progress::-webkit-progress-bar-value {
+		  -webkit-appearance: none;
+		  background: orangered;
+		}
+	</style>
+	
 </head>

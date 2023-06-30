@@ -1,12 +1,16 @@
 <?php
 session_start();
-require_once("include/coreDB.php");
+require("include/coreDB.php");
 
 if(!isset($_GET['code'])){
+	$conn->close();
     header('Location:leagues.php');
 }
 else{
-    extract($_GET);
+	extract($_GET);
+	if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
+		require("include/last_activity.php");
+	}
 }
 
 ?>
@@ -181,7 +185,7 @@ else{
                         <header>
                             <a href="https://times.mw/big-bullets-cruise-to-the-top/" target="_blank">                   
                                 <h3>Big Bullets Cruise To The Top</h3>
-                                <img src='Media/News/big-bullets-631x405.jpg' onerror='article_imgerror(this)' width="100%" alt='image na'>
+                                <img src='Media/News/big-bullets-631x405.jpg' onerror='article_imgerror(this)' width="100%" alt='image na' loading="lazy">
                             </a>
                         </header>
 
@@ -262,13 +266,12 @@ else{
     
                      <!-- code below shows the latest fixtures in the league -->
                      <section class="league_fixtures">
-                <h4>Latest Fixtures</h4>
-                
+                <h4>Latest Scores</h4>
             <?php 
                 
-            @$conn = new mysqli("localhost","Admin","123abc","core");
+            require("include/coreDB.php"); //include this because DB connection is closed above
  
-            if($result=$conn->query("SELECT * FROM `fixtures` where status!='upcoming' ORDER BY DATE desc limit 5 ")){
+            if($result=$conn->query("SELECT * FROM `fixtures` where status='report' OR status='played' ORDER BY DATE desc limit 5 ")){
             if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
             extract($row);                
@@ -281,7 +284,7 @@ else{
             if($status==='live'){
                 $scores = "
                 <div id='scores'>
-                <a href='match_view.php?match_ID=$match_ID&code=$competition_code&competition=$competition'>
+                <a href='match_view.php?match_ID=$match_ID&code=$competition_code&league_name=$competition'>
                     <div style='float:left;width:49%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$home_goals</div>
 
                     <div style='float:right;width:50%;text-align:center;background-color:#2866f6;font-weight:bold;color:white;padding:3px;'>$away_goals </div>
@@ -321,6 +324,16 @@ else{
                     <div style='float:right;width:50%;text-align:center;background-color:#ffd230;font-weight:bold;color:black;padding:3px;'>$away_goals</div>
                 </a>
                 <span style='text-align:center;display:block;color:black;font-size:12px'>FT</span>
+                </div> 
+                ";
+            } 
+			else if($status=='postponed'){                
+                $scores = "
+                <div id='scores'>
+                <a>
+                    <div style='width:100%;text-align:center;background-color:#dbdbdb;font-weight:bold;color:black;padding:3px;overflow:hidden;'>TBD</div> 
+                </a>
+                <span style='text-align:center;display:block;color:black;font-size:13px'>Postponed</span>
                 </div> 
                 ";
             }
@@ -375,7 +388,7 @@ else{
                 <h4>League Top Scorers</h4>
                 <?php 
                 
-                 @$conn = new mysqli("localhost","Admin","123abc","core");
+                 require("include/coreDB.php"); //include this because DB connection is closed above
                 
                 if($result=$conn->query("SELECT * FROM `players` where league_code='$code' or league='$league_name' order by goals desc limit 5")){
                 if($result->num_rows > 0){

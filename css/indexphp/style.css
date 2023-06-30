@@ -32,26 +32,28 @@
     color: #012374;    
 }
 
-
-@media(max-width:515px){
-    
-    #player_list table{
-        width: 100%;
-    }
-    
-    #player_list table tr{
-        border-bottom: 2px solid #e8491d;
-/*        margin-top: 50% !important;*/
-    }
-    
-    #player_list table td{
-        display: block;
-        width: 100%;
-        text-align: center;    
-        padding-left: 50%;
-    }
-    
-    #player_list table thead{
-        display: none;
-    }
+@media(max-width:600px){	
+	table tr td{
+		display:block;
+		width:100%;
+		padding:0px;
+	}
+	
+	#player_list table td{
+		text-align:center;
+	}
+	
+	#player_list tr{
+		border-bottom:2px solid #e8491d;
+		margin-bottom:20px;
+	}
+	
+	#player_list table figure{
+		text-align:center;
+	}
+	
+	table thead{
+		display:none;
+	}
+	
 }

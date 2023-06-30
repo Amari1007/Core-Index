@@ -1,13 +1,14 @@
 <?php
 session_start();
+//YOU SHOULDN'T BE ON THIS PAGE IF YOU AINT AN ADMIN!!!
 
-if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SESSION['user_name']) ){
-    
+if( isset($_SESSION['user_id']) && $_SESSION['user_type']=='admin' && isset($_SESSION['user_name']) ){
+    require("include/last_activity.php");
 }else{
     header("location:sign_in.php");
+	session_unset();
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +31,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
     </head>
 
     <body>
-    <?php require_once("include/header.php") ?>
-
+    <?php require_once("include/header.php");?>
     <main class="container">
         <div class="row">
 

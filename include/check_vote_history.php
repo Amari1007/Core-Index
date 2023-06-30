@@ -75,11 +75,10 @@ if( isset($user_id) && isset($user_name) ){
                                 }
                                 
                             }
-                                    
 
                             echo("        
                             <div id='vote-markers'>
-                                <h3> Who will win? </h3>
+                                <h3> Who will win? (Voting Closed) </h3>
                                 
                                 <p>
                                     <span class='btn btn-success'></span> &bull;

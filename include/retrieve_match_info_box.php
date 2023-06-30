@@ -16,6 +16,6 @@
 
 <div id="bars"> 
     <div class="jumbotron">
-        <h3>Nothing to see here yet...</h3>
+        <h3>Loading...</h3>
     </div>        
 </div>

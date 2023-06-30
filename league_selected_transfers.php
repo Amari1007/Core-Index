@@ -1,15 +1,16 @@
 <?php
 session_start();
-
-require_once("include/coreDB.php");
-
+require("include/coreDB.php");
    
-if(!isset($_GET['code']) && empty($_GET['code'])){
+if( !isset($_GET['code']) ){
     header('Location:leagues.php?error=1');
     $conn->close();
     exit();    
 }else{
     extract($_GET);
+	if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
+		require("include/last_activity.php");
+	}
 }
 
 ?>

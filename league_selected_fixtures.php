@@ -1,13 +1,15 @@
 <?php
 session_start();
-
-require_once("include/coreDB.php");
+require("include/coreDB.php");
 
 if(!isset($_GET['code'])){
+	$conn->close();
     header('Location:leagues.php');
-}
-else{
+}else{
     extract($_GET);
+	if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
+		require("include/last_activity.php");
+	}
 }
 
 ?>
@@ -112,16 +114,17 @@ else{
              <button class="btn" value="2022-03%"><strong>MAR</strong> <br/> 2022</button>  
              <button class="btn" value="2022-04%"><strong>APR</strong> <br/> 2022</button>  
              <button class="btn" value="2022-05%"><strong>MAY</strong> <br/> 2022</button>  
+             <button class="btn" value="2022-06%"><strong>JUN</strong> <br/> 2022</button>  
+             <button class="btn" value="2022-07%"><strong>JUL</strong> <br/> 2022</button>  
+             <button class="btn" value="2022-08%"><strong>AUG</strong> <br/> 2022</button>  
+             <button class="btn" value="2022-09%"><strong>SEP</strong> <br/> 2022</button>  
+             <button class="btn" value="2022-10%"><strong>OCT</strong> <br/> 2022</button>  
         </div>
        
-            
             <div id="display">
             <!--Data here from include/show_league_fixtures.php file -->
                 
             </div>
-            
-            <script>
-            </script>
             
         </main>
 

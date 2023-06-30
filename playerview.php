@@ -1,5 +1,11 @@
 <?php 
 session_start();
+
+if( isset($_SESSION['user_id']) && isset($_SESSION['user_name']) ){
+	//IF USER IS LOGGED IN UPDATE SESSION
+    require("include/last_activity.php"); //will redirect if session expires
+}
+
 $raw = $_SESSION['data'];
 $player_data = json_decode($raw,true);
 ?>

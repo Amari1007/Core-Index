@@ -3,7 +3,8 @@ session_start();
 require_once("include/coreDB.php");
 
 if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SESSION['user_name']) ){
-    
+    require("include/last_activity.php");
+	
     if(empty($_GET['playerid'])){
         header("Location: editplayer.php"); //redirects if playerid is invalid
 
@@ -19,7 +20,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_type']==="admin" && isset($_SE
             }
         }
     }
- 
+	
 }else{
     header("location:sign_in.php");
     exit();

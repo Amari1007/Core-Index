@@ -25,7 +25,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
             $time = date("H:i",$time); // converts to string Hour:Minute time format
             $scores = " ";
                 
-            if($status==='live'){
+            if($status==='live'){ //THIS IS UNCLICKABLE
                 $scores = "
                 <div id='scores'>
                 <a>
@@ -37,7 +37,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                 </div>                
                 ";
             }
-            else if($status==='upcoming'){
+            else if($status==='upcoming'){ //CLICKABLE
                 $scores = "
                 <div id='scores'>
                 <a href='match_view.php?match_ID=$match_ID&code=$competition_code&league_name=$competition'>
@@ -47,7 +47,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                 </div>
                 "; 
             }
-            else if($status=='played'){ 
+            else if($status=='played'){ //CLICKABLE THE SAME AS REPORT
                 $scores = "                
                 <div id='scores'>
                 <a href='match_view.php?match_ID=$match_ID&code=$competition_code&league_name=$competition'>
@@ -59,7 +59,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                 </div>    
                 ";
             }
-            else if($status=='report'){                
+            else if($status=='report'){  //CLICKABLE            
                 $scores = "
                 <div id='scores'>
                 <a href='match_view.php?match_ID=$match_ID&code=$competition_code&league_name=$competition'>
@@ -71,7 +71,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                 </div> 
                 ";
             }            
-            else if($status=='postponed'){                
+            else if($status=='postponed'){ //UNCLICKABLE               
                 $scores = "
                 <div id='scores'>
                 <a>
@@ -118,7 +118,7 @@ if($result = $conn->query("SELECT * FROM `fixtures` WHERE date like '$month' ORD
                         <div id='away_team' style='width:46%;float:right;text-align:left;overflow:hidden;'>$away_team 
                         
                         ".(
-                            $_SESSION['user_type']=='admin'&&isset($_SESSION['user_id'])?" <a data-toggle='collapse' data-target='#view_$match_ID'> &bull; Edit ?  </a>
+                            $_SESSION['user_type']=='admin'&&isset($_SESSION['user_id'])?" <a data-toggle='collapse' data-target='#view_$match_ID' style='cursor:pointer' title='Click to edit this event'> &bull; Edit ?  </a>
 
                         </div>
                     </li>                                                       
